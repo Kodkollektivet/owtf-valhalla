@@ -12,7 +12,7 @@ class OwtfContainer(object):
     def __init__(self, image_path):
         self.container_id = None
         self.image_id = None
-        self.container_instance_id = None
+        self.container_instance_id = None  # This should be implemented for mulit cotainers of the same
         self.config_file_json = None
         self.log = ''
         self.is_image_build = False
@@ -61,8 +61,18 @@ class OwtfContainer(object):
         # Check if container is already build.
         if self.is_valid:
             for c in cli.containers(all=True):
-                if c['Names'][0] == '/'+self.container_name:
+                if c['Names'][0] == '/'+self.container_name+'_'+self.container_version:
                     self.is_container_build = True
+
+        # Check if container is running
+        if self.is_valid and self.is_image_build and self.is_container_build:
+            for cont in cli.containers():
+                if cont['Image'] == self.container_tag:
+                    self.is_running = True
+                    self.container_id = cont['Id']
+
+            # if self.container_tag in [c['Image'] for c in cli.containers()]:
+            #     self.is_running = True
 
     def read_config_file(self):
         """Read config.json and assign it to self.config_file_json"""
@@ -85,9 +95,9 @@ class OwtfContainer(object):
 
     def build_container(self):
         """Build the container from image, tag is self.container_tag"""
-        if self.is_valid and self.is_image_build and not self.is_running:
+        if self.is_valid and self.is_image_build and not self.is_container_build:
             container = cli.create_container(
-                name=self.container_name,
+                name=self.container_name+'_'+self.container_version,
                 image=self.container_tag,
                 command='app.py'
             )
@@ -96,7 +106,7 @@ class OwtfContainer(object):
 
     def start(self):
         """Start container and get the IP"""
-        if self.is_valid and self.is_image_build:
+        if self.is_valid and self.is_image_build and self.is_container_build:
             cli.start(container=self.container_id)
             c_info = cli.inspect_container(container=self.container_id)
             self.is_running = True
@@ -105,11 +115,27 @@ class OwtfContainer(object):
     def stop(self):
         if self.is_running:
             cli.stop(container=self.container_id)
+            self.is_running = False
+
+    def restart(self):
+        self.stop()
+        self.start()
 
     def remove_image(self):
-        pass
+        if self.is_image_build:
+            cli.remove_image(
+                image=self.container_tag,
+                force=True
+            )
+            self.is_image_build = False
 
     def remove_container(self):
+        if self.is_container_build:
+            cli.remove_container(
+                container=self.container_name+'_'+self.container_version,
+                force=True
+            )
+            self.is_container_build = False
         pass
 
     def inspect(self):
@@ -123,32 +149,3 @@ class OwtfContainer(object):
     def __str__(self):
         return 'OwtfContainer({}, {})'.format(self.container_name, self.container_version)
 
-
-# def locate_owtf_containers():
-#     matches = []
-#     for root, dirnames, filenames in os.walk('containers'):
-#         for filename in fnmatch.filter(filenames, 'config.json'):
-#             if 'Dockerfile' and 'config.json' in filenames:
-#                 matches.append(root)
-#     return matches
-
-#containers = [OwtfContainer(container) for container in locate_owtf_containers()]
-
-#pprint(containers[0].__dict__)
-
-# for c in containers:
-#     if c.is_valid:
-#         print('Building container')
-#         c.build_container()
-#         c.start_container()
-        #pprint(c.inspect_container())
-
-        # Starting the container
-        # container = cli.create_container(
-        #     image=c.container_tag,
-        #     command='app.py'
-        # )
-        # response = cli.start(container=container.get('Id'))
-        # c_info = cli.inspect_container(container=container.get('Id'))
-        # print(c_info)
-        #print(response)        

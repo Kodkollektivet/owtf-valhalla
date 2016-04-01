@@ -1,0 +1,28 @@
+
+{
+    "title": "OwtfValhallaTestContainer",
+    "version": "0.1",
+    "description": "This container is only used for testing purposes, save it!",
+    "commands": [
+        {
+            "type": "passive",
+            "code": "666",
+            "command": "sleep 5s"
+        },
+        {
+            "type": "active",
+            "code": "667",
+            "command": "ls -la"
+        },
+        {
+            "type": "semi-passive",
+            "code": "668",
+            "command": "sleep 5s"
+        },
+        {
+            "type": "semi-active",
+            "code": "669",
+            "command": "sleep 5s"
+        }
+    ]
+}

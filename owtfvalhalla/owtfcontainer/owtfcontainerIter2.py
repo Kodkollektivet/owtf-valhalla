@@ -161,6 +161,9 @@ class OwtfContainer(object):
         """Gives a nice json-like output for debug."""
         return pprint.pformat(self.__dict__, indent=4)
 
+    def json(self):
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+
     def __str__(self):
         return 'OwtfContainer({}) based on image: ({},{})'.format(
             self.container_name,

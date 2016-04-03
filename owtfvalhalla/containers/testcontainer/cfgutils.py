@@ -1,5 +1,6 @@
 import json
 
+
 def dump_config_json():
     """Read and return entire config file as json"""
     with open('config.json') as config_file:
@@ -25,3 +26,4 @@ def valid_cfg(config):
         return False
     return True
             
+

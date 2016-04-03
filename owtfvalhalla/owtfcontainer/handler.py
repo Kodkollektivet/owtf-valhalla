@@ -1,7 +1,8 @@
+
 import os
 import fnmatch
 
-from owtfcontainerIter2 import *
+from owtfcontainer import *
 
 owtf_containers_located_in_container_folder = []
 

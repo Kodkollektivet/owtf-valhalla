@@ -14,6 +14,7 @@ from sys import platform
 if platform == "linux" or platform == "linux2":
     from docker import Client
 
+    # FIXME
     # workaround to make sure client and server uses the same api version
     # is there a better way to handle this? !help-wanted
     docker_version_bytes = subprocess.check_output(['docker','version'])

@@ -81,13 +81,11 @@ class OwtfContainer(object):
                 self.image_id = image['Id']
 
         # Check if container is build
-        for container in init_validate_containers:
+        for container in cli.containers(all=True):
             if self.image_id == container['ImageID']:
                 self.is_container_build = True
                 self.container_id = container['Id']
                 self.container_name = self.inspect().get('Name')
-                init_validate_containers.remove(container)  # Look more into this!
-                break  # Dont continue in init_validate_containers list
 
         # Check if container is running
         for container in cli.containers():
@@ -172,7 +170,7 @@ class OwtfContainer(object):
         )
 
 # For manual testing
-if __name__ == '__main__':
-    oc = OwtfContainer('containers/testcontainer')
-    pprint.pprint(oc)
+# if __name__ == '__main__':
+#     oc = OwtfContainer('containers/testcontainer')
+#     pprint.pprint(oc)
 

@@ -29,6 +29,17 @@ Example:
 ```
 
 
+Remove image
+
+```bash
+GET
+container/<IMAGE>/remove_image/
+
+Example:
+/containers/owtfvalhallatestcontainer:0.1/remove_image/
+```
+
+
 Build container
 
 ```bash
@@ -38,6 +49,17 @@ container/<IMAGE>/build_container/
 Example:
 /containers/owtfvalhallatestcontainer:0.1/build_container/
 ```
+
+Remove container
+
+```bash
+GET
+container/<IMAGE>/remove_container/
+
+Example:
+/containers/owtfvalhallatestcontainer:0.1/remove_container/
+```
+
 
 Start container
 

@@ -80,6 +80,9 @@ class OwtfContainerTest(unittest.TestCase):
         self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers()])
         self.assertFalse(oc.is_running)
 
+if __name__ == '__main__':
+    unittest.main()
+
 
 
 

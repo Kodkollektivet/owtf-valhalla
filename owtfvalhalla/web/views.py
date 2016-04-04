@@ -11,20 +11,126 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.renderers import JSONRenderer
 
-from owtfcontainer import OwtfContainer
-from owtfcontainer.handler import locate_owtf_containers, owtf_containers_located_in_container_folder
+from web import serializers
+
+from owtfcontainer import get_owtf_c
 
 
 class IndexTemplateView(TemplateView):
     template_name = 'index.html'
 
 
-class ListAllOwtfContainers(APIView):
-
-    renderer_classes = (JSONRenderer,)
+class ListAll(APIView):
 
     def get(self, request, format=None):
 
-        return HttpResponse([i.config for i in owtf_containers_located_in_container_folder], content_type='application/json')
+        serializer = serializers.OwtfContainerSerializer(
+            get_owtf_c()[1],  # Get all containers
+            many=True
+        )
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+class Info(APIView):
+
+    def get(self, request, image, *args, **kwargs):
+
+        sts, image = get_owtf_c(image=image)
+
+        if sts:
+            serializer = serializers.OwtfContainerSerializer(image)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return HttpResponse('Failed!')
+
+
+class BuildImage(APIView):
+
+    def get(self, request, image, *args, **kwargs):
+
+        sts, image = get_owtf_c(image=image)
+
+        if sts:
+            image.build_image()
+            serializer = serializers.OwtfContainerSerializer(image)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return HttpResponse('Failed!')
+
+
+class RemoveImage(APIView):
+
+    def get(self, request, image, *args, **kwargs):
+
+        sts, image = get_owtf_c(image=image)
+
+        if sts:
+            image.remove_image()
+            serializer = serializers.OwtfContainerSerializer(image)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return HttpResponse('Failed!')
+
+
+class BuildContainer(APIView):
+
+    def get(self, request, image, *args, **kwargs):
+
+        sts, image = get_owtf_c(image=image)
+
+        if sts:
+            image.build_container()
+            serializer = serializers.OwtfContainerSerializer(image)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return HttpResponse('Failed!')
+
+
+class RemoveContainer(APIView):
+
+    def get(self, request, image, *args, **kwargs):
+
+        sts, image = get_owtf_c(image=image)
+
+        if sts:
+            image.remove_container()
+            serializer = serializers.OwtfContainerSerializer(image)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return HttpResponse('Failed!')
+
+
+class Start(APIView):
+
+    def get(self, request, image, *args, **kwargs):
+
+        sts, image = get_owtf_c(image=image)
+
+        if sts:
+            image.start()
+            serializer = serializers.OwtfContainerSerializer(image)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return HttpResponse('Failed!')
+
+
+class Stop(APIView):
+
+    def get(self, request, image, *args, **kwargs):
+
+        sts, image = get_owtf_c(image=image)
+
+        if sts:
+            image.stop()
+            serializer = serializers.OwtfContainerSerializer(image)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return HttpResponse('Failed!')

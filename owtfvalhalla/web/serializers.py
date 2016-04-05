@@ -33,4 +33,12 @@ class CommandSerializer(serializers.Serializer):
     """
     command = serializers.CharField(allow_blank=False)
     code = serializers.CharField()
-    type = serializers.CharField()
+    noise = serializers.CharField()
+    target = serializers.CharField()
+    description = serializers.CharField()
+    results = serializers.CharField(required=False, allow_blank=False)
+    
+
+
+
+    

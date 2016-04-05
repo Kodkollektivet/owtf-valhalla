@@ -36,9 +36,9 @@ class Info(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        sts, image = get_owtf_c(image=image)
+        image_status, image = get_owtf_c(image=image)
 
-        if sts:
+        if image_status:
             serializer = serializers.OwtfContainerSerializer(image)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -51,9 +51,9 @@ class BuildImage(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        sts, image = get_owtf_c(image=image)
+        image_status, image = get_owtf_c(image=image)
 
-        if sts:
+        if image_status:
             image.build_image()
             serializer = serializers.OwtfContainerSerializer(image)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -67,9 +67,9 @@ class RemoveImage(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        sts, image = get_owtf_c(image=image)
+        image_status, image = get_owtf_c(image=image)
 
-        if sts:
+        if image_status:
             image.remove_image()
             serializer = serializers.OwtfContainerSerializer(image)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -83,9 +83,9 @@ class BuildContainer(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        sts, image = get_owtf_c(image=image)
+        image_status, image = get_owtf_c(image=image)
 
-        if sts:
+        if image_status:
             image.build_container()
             serializer = serializers.OwtfContainerSerializer(image)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -99,9 +99,9 @@ class RemoveContainer(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        sts, image = get_owtf_c(image=image)
+        image_status, image = get_owtf_c(image=image)
 
-        if sts:
+        if image_status:
             image.remove_container()
             serializer = serializers.OwtfContainerSerializer(image)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -115,9 +115,9 @@ class Start(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        sts, image = get_owtf_c(image=image)
+        image_status, image = get_owtf_c(image=image)
 
-        if sts:
+        if image_status:
             image.start()
             serializer = serializers.OwtfContainerSerializer(image)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -131,9 +131,9 @@ class Stop(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        sts, image = get_owtf_c(image=image)
+        image_status, image = get_owtf_c(image=image)
 
-        if sts:
+        if image_status:
             image.stop()
             serializer = serializers.OwtfContainerSerializer(image)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -147,9 +147,9 @@ class Execute(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        sts, image = get_owtf_c(image=image)
+        image_status, image = get_owtf_c(image=image)
 
-        if sts:
+        if image_status:
             serializer = serializers.OwtfContainerSerializer(image)
             return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -157,14 +157,16 @@ class Execute(APIView):
             return HttpResponse('Failed!')
 
     def post(self, request, image, *args, **kwargs):
-        sts, image = get_owtf_c(image=image)
+        image_status, image = get_owtf_c(image=image)
 
-        if sts:
+        if image_status:
+            pprint(request.data)
+            request_data = serializers.CommandSerializer(data=request.data)
+            if request_data.is_valid():
+                pprint(request_data.data.get('command'))
+                serializer = serializers.OwtfContainerSerializer(image)
+                return Response(serializer.data, status=status.HTTP_200_OK)
 
-            command = serializers.CommandSerializer(data=request.data)
-            pprint(command.command)
-            serializer = serializers.OwtfContainerSerializer(image)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
+            return HttpResponse('Command is not valid!')
         else:
             return HttpResponse('Failed!')

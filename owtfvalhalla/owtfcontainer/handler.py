@@ -35,8 +35,6 @@ def get_owtf_c(image=None, image_id=None, container_id=None):
     obj = object
     """
 
-    print(len(_containers))
-
     if image and image_id and container_id is not None:
         return False, ValueError("All params cant be set. Choose one of them of none.")
 

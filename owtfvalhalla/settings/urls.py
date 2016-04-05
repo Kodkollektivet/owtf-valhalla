@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^containers/(?P<image>[a-zA-z0-9:.]+)/remove_container/$', views.RemoveContainer.as_view()),
     url(r'^containers/(?P<image>[a-zA-z0-9:.]+)/start/$', views.Start.as_view()),
     url(r'^containers/(?P<image>[a-zA-z0-9:.]+)/stop/$', views.Stop.as_view()),
+    url(r'^containers/(?P<image>[a-zA-z0-9:.]+)/execute/$', views.Execute.as_view()),
     url(r'^$', views.IndexTemplateView.as_view()),
     url(r'^admin/', admin.site.urls),
 ]

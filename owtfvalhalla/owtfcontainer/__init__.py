@@ -11,8 +11,8 @@ that is relevant to a container/image.
 
 __author__ = 'owtf-valhalla'
 
-from owtfcontainerIter2 import OwtfContainer
-from handler import owtf_containers_located_in_container_folder, locate_owtf_containers
+from owtfcontainer import OwtfContainer
+from handler import get_owtf_c
 
 
 

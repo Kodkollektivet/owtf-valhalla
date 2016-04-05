@@ -6,14 +6,14 @@ from owtfvalhalla.owtfcontainer.dclient import *
 
 class OwtfContainerTest(unittest.TestCase):
 
-    def setUp(self):
-        oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
-        if oc.image_id in [i['Id'] for i in cli.images()]:
-            oc.remove_image()
-
-        if oc.container_id in [i['Id'] for i in cli.containers(all=True)]:
-            oc.remove_container()
-
+    # def setUp(self):
+    #     oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+    #     if oc.image_id in [i['Id'] for i in cli.images()]:
+    #         oc.remove_image()
+    #
+    #     if oc.container_id in [i['Id'] for i in cli.containers(all=True)]:
+    #         oc.remove_container()
+    #
     def tearDown(self):
         oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
         if oc.image_id in [i['Id'] for i in cli.images()]:
@@ -21,6 +21,10 @@ class OwtfContainerTest(unittest.TestCase):
 
         if oc.container_id in [i['Id'] for i in cli.containers(all=True)]:
             oc.remove_container()
+
+    def test_not_valid_false(self):
+        oc = OwtfContainer('../owtfvalhalla/containers/testcontainers')
+        self.assertFalse(oc.is_valid)
 
     def test_validate_true(self):
         oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
@@ -79,6 +83,21 @@ class OwtfContainerTest(unittest.TestCase):
         oc.stop()
         self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers()])
         self.assertFalse(oc.is_running)
+
+    def test_running_container(self):
+        oc1 = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+        oc1.build_image()
+        oc1.build_container()
+        oc1.start()
+        oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+        self.assertTrue(oc.is_valid)
+        self.assertTrue(oc.is_image_build)
+        self.assertTrue(oc.is_container_build)
+        self.assertTrue(oc.is_running)
+        self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers()])
+
+if __name__ == '__main__':
+    unittest.main()
 
 
 

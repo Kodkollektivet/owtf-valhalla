@@ -1,6 +1,7 @@
 django
-docker-py==1.8.0rc4
+docker-py==1.8.0rc5
 requests
 djangorestframework
 markdown
 django-filter
+coverage

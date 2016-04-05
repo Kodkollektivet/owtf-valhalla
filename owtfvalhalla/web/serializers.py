@@ -1,8 +1,12 @@
-
 from rest_framework import serializers
 
 
 class OwtfContainerSerializer(serializers.Serializer):
+    """This serializer object maps to the OwtfContainer object.
+    The reason for this is to more easily transfer between a Python obj and a JSON object.
+    This object is mainly used in views.py where we map OwtfContainer to OwtfContainerSerializer
+    and send the OwtfContainerSerializer object as JSON.
+    """
     image = serializers.CharField(max_length=254, required=False)
     image_id = serializers.CharField(max_length=254, required=False)
     image_name = serializers.CharField(max_length=254, required=False)
@@ -23,4 +27,10 @@ class OwtfContainerSerializer(serializers.Serializer):
 
 
 class CommandSerializer(serializers.Serializer):
-    command_obj = serializers.JSONField()
+    """This is the serializer for the commands that we receive through the Rest API.
+    The command is a JSON object that we then will pass on to the associated container
+    and the container executes the command.
+    """
+    command = serializers.CharField(allow_blank=False)
+    code = serializers.CharField()
+    type = serializers.CharField()

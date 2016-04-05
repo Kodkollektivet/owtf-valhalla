@@ -1,7 +1,5 @@
-
 import os
 import fnmatch
-from pprint import pprint
 
 from owtfcontainer import OwtfContainer
 
@@ -24,7 +22,20 @@ locate_owtf_containers()
 
 
 def get_owtf_c(image=None, image_id=None, container_id=None):
-    """This is the facade to the outside."""
+    """This is the facade to the outside.
+    If get_owtf_c() with no arguments is called, returns all the containers
+    If get_owtf_c(image=<IMAGE>), return that container
+    If get_owtf_c(image=<IMAGE_ID>) if image is build, return that container
+    If get_owtf_c(image=<CONTAINER_ID>) if container is buld, return that container
+
+    Only one or no argument can be passed.
+
+    Returns a tuple (bool, obj)
+    bool = status
+    obj = object
+    """
+
+    print(len(_containers))
 
     if image and image_id and container_id is not None:
         return False, ValueError("All params cant be set. Choose one of them of none.")

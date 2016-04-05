@@ -36,7 +36,7 @@ class OwtfContainer(object):
 
         self.log = ''  # This string will contain log output.
 
-        self._validate_config_image_and_container()
+        self._validate_config_image_and_container()  # Start the validation
 
     def _validate_config_image_and_container(self):
         """Internal validator"""

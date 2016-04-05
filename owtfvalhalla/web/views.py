@@ -1,7 +1,6 @@
 from pprint import pprint
 import json
 
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.core import serializers
@@ -9,7 +8,6 @@ from django.core import serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.renderers import JSONRenderer
 
 from web import serializers
 
@@ -21,6 +19,7 @@ class IndexTemplateView(TemplateView):
 
 
 class ListAll(APIView):
+    """Lists all the containers."""
 
     def get(self, request, format=None):
 
@@ -33,6 +32,7 @@ class ListAll(APIView):
 
 
 class Info(APIView):
+    """Get info about a specific container."""
 
     def get(self, request, image, *args, **kwargs):
 
@@ -47,6 +47,7 @@ class Info(APIView):
 
 
 class BuildImage(APIView):
+    """Build image"""
 
     def get(self, request, image, *args, **kwargs):
 
@@ -62,6 +63,7 @@ class BuildImage(APIView):
 
 
 class RemoveImage(APIView):
+    """Remove image"""
 
     def get(self, request, image, *args, **kwargs):
 
@@ -77,6 +79,7 @@ class RemoveImage(APIView):
 
 
 class BuildContainer(APIView):
+    """Build container"""
 
     def get(self, request, image, *args, **kwargs):
 
@@ -92,6 +95,7 @@ class BuildContainer(APIView):
 
 
 class RemoveContainer(APIView):
+    """Remove container"""
 
     def get(self, request, image, *args, **kwargs):
 
@@ -107,6 +111,7 @@ class RemoveContainer(APIView):
 
 
 class Start(APIView):
+    """Start container"""
 
     def get(self, request, image, *args, **kwargs):
 
@@ -122,6 +127,7 @@ class Start(APIView):
 
 
 class Stop(APIView):
+    """Stop container"""
 
     def get(self, request, image, *args, **kwargs):
 
@@ -129,6 +135,34 @@ class Stop(APIView):
 
         if sts:
             image.stop()
+            serializer = serializers.OwtfContainerSerializer(image)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return HttpResponse('Failed!')
+
+
+class Execute(APIView):
+    """Get a command and the pass it on to the associated container"""
+
+    def get(self, request, image, *args, **kwargs):
+
+        sts, image = get_owtf_c(image=image)
+
+        if sts:
+            serializer = serializers.OwtfContainerSerializer(image)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return HttpResponse('Failed!')
+
+    def post(self, request, image, *args, **kwargs):
+        sts, image = get_owtf_c(image=image)
+
+        if sts:
+
+            command = serializers.CommandSerializer(data=request.data)
+            pprint(command.command)
             serializer = serializers.OwtfContainerSerializer(image)
             return Response(serializer.data, status=status.HTTP_200_OK)
 

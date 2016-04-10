@@ -20,6 +20,8 @@ class OwtfContainerSerializer(serializers.Serializer):
     config = serializers.JSONField()
     ip_address = serializers.CharField(max_length=254, required=False)
 
+    results = serializers.JSONField(required=False)
+
     is_image_build = serializers.BooleanField()
     is_container_build = serializers.BooleanField()
     is_valid = serializers.BooleanField()
@@ -34,11 +36,8 @@ class CommandSerializer(serializers.Serializer):
     command = serializers.CharField(allow_blank=False)
     code = serializers.CharField()
     noise = serializers.CharField()
-    target = serializers.CharField()
+    target = serializers.CharField(required=False, allow_blank=True)
     description = serializers.CharField()
     results = serializers.CharField(required=False, allow_blank=False)
-    
 
 
-
-    

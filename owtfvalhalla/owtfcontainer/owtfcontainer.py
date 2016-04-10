@@ -35,6 +35,7 @@ class OwtfContainer(object):
         self.is_running = False
 
         self.log = ''  # This string will contain log output.
+        self.results = []
 
         self._validate_config_image_and_container()  # Start the validation
 
@@ -43,16 +44,19 @@ class OwtfContainer(object):
         # Check required files and folders
         if not os.path.isdir(self.image_path):
             self.is_valid = False
+            print('Cant find containers dir...')
             # TODO: Add log message
             return
 
         elif not os.path.isfile(os.path.join(self.image_path, 'config.json')):
             self.is_valid = False
+            print('Cant find config.json...')
             # TODO: Add log message
             return
 
         elif not os.path.isfile(os.path.join(self.image_path, 'Dockerfile')):
             self.is_valid = False
+            print('Cant find Dockerfile...')
             # TODO: Add log message
             return
 
@@ -93,18 +97,21 @@ class OwtfContainer(object):
                 self.container_name = container['Names'][0]
                 self.ip_address = container['NetworkSettings']['Networks']['bridge']['IPAddress']
                 self.is_running = True
+        print('The OwtfContainer is valid!')
 
     def build_image(self):
         """Build image."""
         if self.is_valid and not self.is_image_build:
+            print('Building image...')
             for log in cli.build(path=self.image_path, rm=True, tag=self.image):
-                self.log += str(log)
+                print(log,)
             self.is_image_build = True
             self.image_id = (i for i in cli.images() if i['RepoTags'][0] == self.image).next().get('Id')
 
     def remove_image(self):
         """Remove image."""
         if self.is_image_build:
+            print('Removing image...')
             cli.remove_image(image=self.image, force=True)
             self.is_image_build = False
 
@@ -112,6 +119,7 @@ class OwtfContainer(object):
     def build_container(self):
         """Build container."""
         if self.is_valid and self.is_image_build and not self.is_container_build:
+            print('Building container...')
             container = cli.create_container(image=self.image, command='app.py')
             self.is_container_build = True
             self.container_id = container.get('Id')
@@ -120,12 +128,14 @@ class OwtfContainer(object):
     def remove_container(self):
         """Remove container."""
         if self.is_container_build:
+            print('Removing container...')
             cli.remove_container(container=self.container_id, force=True)
             self.is_container_build = False
 
     def start(self):
         """Start container."""
         if self.is_valid and self.is_image_build and self.is_container_build and not self.is_running:
+            print('Starting container...')
             cli.start(container=self.container_id)
             info = cli.inspect_container(container=self.container_id)
             self.is_running = True
@@ -134,6 +144,7 @@ class OwtfContainer(object):
     def stop(self):
         """Stop running container if running."""
         if self.is_running:
+            print('Stopping container...')
             cli.stop(container=self.container_id)
             self.is_running = False
 

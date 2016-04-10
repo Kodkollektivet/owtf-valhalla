@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from web import serializers
+from middleman import handler as middleman
 
 from owtfcontainer import get_owtf_c
 
@@ -162,16 +163,22 @@ class Execute(APIView):
             return HttpResponse('Failed!')
 
     def post(self, request, image, *args, **kwargs):
+
         image_status, image = get_owtf_c(image=image)
 
         if image_status:
-            pprint(request.data)
+
+            image.build_image()
+            image.build_container()
+            image.start()
+
             request_data = serializers.CommandSerializer(data=request.data)
             if request_data.is_valid():
-                pprint(request_data.data.get('command'))
+                image.results.append(middleman.send_for_execution(image.ip_address, request_data.data))
                 serializer = serializers.OwtfContainerSerializer(image)
                 return Response(serializer.data, status=status.HTTP_200_OK)
 
+            pprint(request_data.errors)
             return HttpResponse('Command is not valid!')
         else:
             return HttpResponse('Failed!')

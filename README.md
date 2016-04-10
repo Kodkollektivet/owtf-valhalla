@@ -42,6 +42,16 @@ Run the tests
 python -m unittest discover tests
 ```
 
+Start Django web server
+
+```bash
+cd owtfvalhalla
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+```
+
+Open browser and go to [http://127.0.0.1:8000/containers/](http://127.0.0.1:8000/containers/)
 
 ## Todo
 

@@ -7,11 +7,17 @@
 * docker-py 1.8.0rc4
 * django
 * requests
+* Docker server API version 1.22
 
 At the moment docker-py have issues with Python 3.
 As we heavily depend on that we need to be on Python 2
-as for now.
+as for now. 
 
+If you installed docker.io via apt-get, you may have an old version which is not compatible with docker-py. To check this run:
+```bash
+docker version
+```
+The output shows you what Server API version you are running.
 
 ## Run tests
 

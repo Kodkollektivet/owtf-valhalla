@@ -8,7 +8,6 @@ the docker client.
 Ex:
 from dclient import dclient as cli
 """
-import subprocess
 from sys import platform
 
 if platform == "linux" or platform == "linux2":

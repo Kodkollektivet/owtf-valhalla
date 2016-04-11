@@ -12,7 +12,7 @@ from rest_framework import status
 from web import serializers
 from middleman import handler as middleman
 
-from owtfcontainer import get_owtf_c
+from dockerutils import get_owtf_c
 
 
 class IndexTemplateView(TemplateView):

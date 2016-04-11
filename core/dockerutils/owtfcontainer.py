@@ -12,7 +12,7 @@ from dclient import *
 
 
 class OwtfContainer(object):
-    """OwtfContainer matches images and containers in the owtfvalhalla/cotainers dir."""
+    """OwtfContainer matches images and containers in the core/cotainers dir."""
 
     def __init__(self, owtf_image_path):
 

@@ -1,13 +1,13 @@
 #!/bin/bash
 
-HELP_MSG="Usage: $0 {setup|start|test}"
+HELP_MSG="Usage: $0 {install|start|test}"
 
 VIRTUAL_ENV="venv/bin/activate"
 MANAGE_PY="core/manage.py"
 
 function setup {
   printf "Creating virtual environment...\n\n"
-  virtualenv --python=/usr/bin/python venv
+  virtualenv --python=/usr/bin/python2 venv
   source venv/bin/activate
   pip install -q --log-file log/pip-error.log -r requirements.txt
 
@@ -28,14 +28,12 @@ function init {
 
 function start {
   printf "Starting Offensive Web Testing Framework - Valhalla...\n"
-  python $MANAGE_PY runserver 0.0.0.0:8000
+  python $MANAGE_PY runserver
 }
 
 function test {
   echo "Running nosetests..."
-  #nosetests-2.7 -q -w test/
-  #python -m unittest discover -v
-  python core/manage.py test
+  nosetests-2.7 -q -w test/
 }
 
 if [[ $# > 1 ]]; then

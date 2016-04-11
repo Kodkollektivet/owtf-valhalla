@@ -1,13 +1,13 @@
 #!/bin/bash
 
-HELP_MSG="Usage: $0 {install|start|test}"
+HELP_MSG="Usage: $0 {setup|start|test}"
 
 VIRTUAL_ENV="venv/bin/activate"
 MANAGE_PY="core/manage.py"
 
 function setup {
   printf "Creating virtual environment...\n\n"
-  virtualenv --python=/usr/bin/python2 venv
+  virtualenv --python=/usr/bin/python venv
   source venv/bin/activate
   pip install -q --log-file log/pip-error.log -r requirements.txt
 
@@ -33,7 +33,8 @@ function start {
 
 function test {
   echo "Running nosetests..."
-  nosetests-2.7 -q -w test/
+  #nosetests-2.7 -q -w test/
+  python -m unittest discover -v
 }
 
 if [[ $# > 1 ]]; then

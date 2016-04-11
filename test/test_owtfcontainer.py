@@ -1,8 +1,8 @@
 import unittest
+
 from core.dockerutils import OwtfContainer
 from core.dockerutils.dclient import *
 
-TEST_CONTAINER_PATH = '../containers/testcontainer'
 
 class OwtfContainerTest(unittest.TestCase):
     """Integration tests for the OwtfContainer object.
@@ -26,35 +26,19 @@ class OwtfContainerTest(unittest.TestCase):
     def test_01_stop_remove_image_and_container(self):
         oc = OwtfContainer(self.container_location)
 
-<<<<<<< HEAD
         oc.stop()
         self.assertFalse(oc.is_running)
-=======
-    # def setUp(self):
-    #     oc = OwtfContainer('../core/containers/testcontainer')
-    #     if oc.image_id in [i['Id'] for i in cli.images()]:
-    #         oc.remove_image()
-    #
-    #     if oc.container_id in [i['Id'] for i in cli.containers(all=True)]:
-    #         oc.remove_container()
-    #
-    def tearDown(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        if oc.image_id in [i['Id'] for i in cli.images()]:
-            oc.remove_image()
->>>>>>> 175bb34... Fix paths and imports to reflect new file structure
 
-        if oc.is_container_built:
+        if oc.is_container_build:
             oc.remove_container()
-            self.assertFalse(oc.is_container_built)
+            self.assertFalse(oc.is_container_build)
 
-<<<<<<< HEAD
-        if oc.is_image_built:
+        if oc.is_image_build:
             oc.remove_image()
-            self.assertFalse(oc.is_image_built)
+            self.assertFalse(oc.is_image_build)
 
-        self.assertFalse(oc.is_image_built)
-        self.assertFalse(oc.is_container_built)
+        self.assertFalse(oc.is_image_build)
+        self.assertFalse(oc.is_container_build)
         self.assertFalse(oc.image_id in [i['Id'] for i in cli.images()])
         self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
 
@@ -68,75 +52,23 @@ class OwtfContainerTest(unittest.TestCase):
 
     def test_04_build_image(self):
         oc = OwtfContainer(self.container_location)
-=======
-    def test_not_valid_false(self):
-        oc = OwtfContainer('../core/containers/testcontainers')
-        self.assertFalse(oc.is_valid)
-
-    def test_validate_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        self.assertTrue(oc.is_valid)
-
-    def test_buildingimage_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
->>>>>>> 175bb34... Fix paths and imports to reflect new file structure
         self.assertTrue(oc.is_valid)
         oc.build_image()
-        self.assertTrue(oc.is_image_built)
+        self.assertTrue(oc.is_image_build)
         self.assertTrue(oc.image_id in [i['Id'] for i in cli.images()])
 
-<<<<<<< HEAD
     def test_05_build_container(self):
         oc = OwtfContainer(self.container_location)
-        self.assertTrue(oc.is_image_built)
-        self.assertFalse(oc.is_container_built)
-=======
-    def test_removeimage_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        oc.build_image()
         self.assertTrue(oc.is_image_build)
-        oc.remove_image()
-        self.assertFalse(oc.is_image_build)
-        self.assertFalse(oc.image_id in [i['Id'] for i in cli.images()])
-
-    def test_buildcontainer_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        if oc.is_running and oc.is_container_build:
-            oc.stop()
-            self.assertFalse(oc.is_running)
-            oc.remove_container()
-            self.assertFalse(oc.is_container_build)
-        oc.build_image()
-        self.assertTrue(oc.is_image_build)
->>>>>>> 175bb34... Fix paths and imports to reflect new file structure
-        oc.build_container()
-        self.assertTrue(oc.is_container_built)
-        self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
-
-<<<<<<< HEAD
-    def test_06_start_contianer(self):
-        oc = OwtfContainer(self.container_location)
-        self.assertTrue(oc.is_image_built)
-        self.assertTrue(oc.is_container_built)
-=======
-    def test_removecontainer_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        if not oc.is_container_build:
-            oc.build_image()
-            oc.build_container()
-            self.assertTrue(oc.is_image_build)
-            self.assertTrue(oc.is_container_build)
-        oc.remove_container()
         self.assertFalse(oc.is_container_build)
-        self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
-
-    def test_startcommandsstop_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        oc.build_image()
-        self.assertTrue(oc.is_image_build)
         oc.build_container()
         self.assertTrue(oc.is_container_build)
->>>>>>> 175bb34... Fix paths and imports to reflect new file structure
+        self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
+
+    def test_06_start_contianer(self):
+        oc = OwtfContainer(self.container_location)
+        self.assertTrue(oc.is_image_build)
+        self.assertTrue(oc.is_container_build)
         oc.start()
         self.assertTrue(oc.is_running)
         self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers()])
@@ -150,29 +82,15 @@ class OwtfContainerTest(unittest.TestCase):
 
     def test_08_remove_image_and_container(self):
         oc = OwtfContainer(self.container_location)
-        self.assertTrue(oc.is_container_built)
-        self.assertTrue(oc.is_image_built)
+        self.assertTrue(oc.is_container_build)
+        self.assertTrue(oc.is_image_build)
         oc.remove_container()
-        self.assertFalse(oc.is_container_built)
+        self.assertFalse(oc.is_container_build)
         self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
         oc.remove_image()
-        self.assertFalse(oc.is_image_built)
+        self.assertFalse(oc.is_image_build)
         self.assertFalse(oc.image_id in [i['Id'] for i in cli.images()])
 
-<<<<<<< HEAD
-=======
-    def test_running_container(self):
-        oc1 = OwtfContainer(TEST_CONTAINER_PATH)
-        oc1.build_image()
-        oc1.build_container()
-        oc1.start()
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        self.assertTrue(oc.is_valid)
-        self.assertTrue(oc.is_image_build)
-        self.assertTrue(oc.is_container_build)
-        self.assertTrue(oc.is_running)
-        self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers()])
->>>>>>> 175bb34... Fix paths and imports to reflect new file structure
 
 if __name__ == '__main__':
     unittest.main()

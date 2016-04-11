@@ -78,7 +78,7 @@ class OwtfContainerTest(unittest.TestCase):
         oc.start()
         self.assertTrue(oc.is_running)
         self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers()])
-        commands = '[{"command": "sleep 5s", "code": "666", "type": "passive"}, {"command": "ls -la", "code": "667", "type": "active"}, {"command": "sleep 5s", "code": "668", "type": "semi-passive"}, {"command": "sleep 5s", "code": "669", "type": "semi-active"}]'
+        commands = '[{"code": "666", "noise": "passive", "command": "sleep 5s", "target": "", "description": "Test"}]'
         self.assertEqual(oc.get_available_commands(), commands)
         oc.stop()
         self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers()])

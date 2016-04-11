@@ -7,14 +7,8 @@ the one we should build from
 import os
 import pprint
 import json
-import logging
-from .exceptions import DockerContainerException, DockerImageException
-from . import dclient as dc
 
-# List with ports that can be assigned to container
-_available_ports = [i for i in range(6000, 6100, 1)]  # 100 containers
-
-log = logging.getLogger(__name__)
+from dclient import *
 
 
 class OwtfContainer(object):
@@ -34,10 +28,9 @@ class OwtfContainer(object):
 
         self.config = None  # The config.json file in loaded in here
         self.ip_address = None  # Container ip address
-        self.port = None  # Forwarding port in the container
 
-        self.is_image_built = False
-        self.is_container_built = False
+        self.is_image_build = False
+        self.is_container_build = False
         self.is_valid = False
         self.is_running = False
 
@@ -47,221 +40,119 @@ class OwtfContainer(object):
         self._validate_config_image_and_container()  # Start the validation
 
     def _validate_config_image_and_container(self):
-        """Internal validator
-        Validate that files and folders are in place.
-        Check if image/container is built/running.
-        """
+        """Internal validator"""
         # Check required files and folders
-        log.debug('Validating: ' + self.image_path)
         if not os.path.isdir(self.image_path):
             self.is_valid = False
-            log.debug('Can\'t find container dir! NOT VALID!')
+            print('Cant find containers dir...')
+            # TODO: Add log message
             return
 
         elif not os.path.isfile(os.path.join(self.image_path, 'config.json')):
             self.is_valid = False
-            log.debug('Can\'t find config.json! NOT VALID!')
+            print('Cant find config.json...')
+            # TODO: Add log message
             return
 
         elif not os.path.isfile(os.path.join(self.image_path, 'Dockerfile')):
             self.is_valid = False
-            log.debug('Can\'t find Dockerfile! NOT VALID!')
+            print('Cant find Dockerfile...')
+            # TODO: Add log message
             return
 
         else:
             self.is_valid = True
-            log.debug('Container files and folder are in place.')
+            # TODO: Add log message
 
         # Validate config.json and read it
-        log.debug('Inspecting config.json file.')
         try:
             with open(os.path.join(self.image_path, 'config.json')) as configfile:
                 self.config = json.load(configfile)
                 self.image_name = self.config['title']
                 self.image_version = self.config['version']
                 self.image = self.image_name.lower() + ':' + self.image_version  # Docker wants this
-                log.debug('Inspection OK.')
+                # TODO: Add log message
 
         except ValueError as e:
             self.is_valid = False
-            # a bit more informative error, tells where the error was in JSON
-            log.debug('config.json is not valid!\n\t' + e.message)
+            # TODO: Add log message
             return
 
-        # Check if image is built
-        for image in dc.cli.images():
+        # Check if image is build
+        for image in cli.images():
             if self.image == image['RepoTags'][0]:
-                self.is_image_built = True
+                self.is_image_build = True
                 self.image_id = image['Id']
-                log.debug('Image is built.')
 
-        # Check if container is built
-        for container in dc.cli.containers(all=True):
+        # Check if container is build
+        for container in cli.containers(all=True):
             if self.image_id == container['ImageID']:
-                log.debug('Container is built.')
-                if dc.is_linux:
-                    self.port = 5000
-                else:
-                    try:
-                        self.port = container['Ports'][0]['PublicPort']  # Assign the port.
-                        _available_ports.remove(self.port)  # Remove port from _available ports.
-
-                    except Exception as e:
-                        log.debug(e)
-
-
-                self.is_container_built = True
+                self.is_container_build = True
                 self.container_id = container['Id']
                 self.container_name = self.inspect().get('Name')
 
         # Check if container is running
-        for container in dc.cli.containers():
+        for container in cli.containers():
             if self.container_id == container['Id']:
-                log.debug('Container is running.')
                 self.container_name = container['Names'][0]
-                if dc.is_linux:
-                    self.ip_address = container['NetworkSettings']['Networks']['bridge']['IPAddress']
-                else:
-                    self.ip_address = '192.168.99.100'
+                self.ip_address = container['NetworkSettings']['Networks']['bridge']['IPAddress']
                 self.is_running = True
-
-        log.debug('Validation and inspection ends. Container looks OK!')
+        print('The OwtfContainer is valid!')
 
     def build_image(self):
-        """Build image.
-        If image is valid, build it.
-        After image is built, assign image_id to obj.
-        Validate that image exists in docker land.
-        """
-        if self.is_valid and not self.is_image_built:
-
-            log.debug(self.image + ' building image...')
-            for build_log in dc.cli.build(path=self.image_path, rm=True, tag=self.image):
-                log.debug(build_log.replace('\n', ''))
-
-            self.image_id = [i for i in dc.cli.images() if self.image in i['RepoTags']][0].get('Id')
-
-            if self.image_id in [i['Id'] for i in dc.cli.images()] \
-                    and self.image in [i['RepoTags'][0] for i in dc.cli.images()]:
-                self.is_image_built = True
-
-            else:
-                log.error('Could not find the built image!')
-                raise DockerImageException('Failed to build image!')
+        """Build image."""
+        if self.is_valid and not self.is_image_build:
+            print('Building image...')
+            for log in cli.build(path=self.image_path, rm=True, tag=self.image):
+                print(log,)
+            self.is_image_build = True
+            self.image_id = (i for i in cli.images() if i['RepoTags'][0] == self.image).next().get('Id')
 
     def remove_image(self):
-        """Remove image.
-        Validate that image have been removed in docker land.
-        """
-        if self.is_image_built:
-            log.debug(self.image + 'removing image...')
-            dc.cli.remove_image(image=self.image, force=True)
-            if self.image_id not in [i['Id'] for i in dc.cli.images()]:
-                self.is_image_built = False
-            else:
-                log.error('Image was not removed!')
-                raise DockerImageException('Failed to remove image!')
+        """Remove image."""
+        if self.is_image_build:
+            print('Removing image...')
+            cli.remove_image(image=self.image, force=True)
+            self.is_image_build = False
 
     # Container related methods
     def build_container(self):
-        """Build container.
-        Check what OS application is running on.
-        Set port and ip depending on OS.
-        Get container id and name.
-        Validate that container exists in docker land.
-        """
-        if self.is_valid and self.is_image_built and not self.is_container_built:
-            log.debug(self.image + 'building container...')
-
-            if dc.is_linux:
-                self.port = 5000
-                container = dc.cli.create_container(image=self.image, command='app.py')
-
-            else:
-                self.port = _available_ports.pop(0)
-                container = dc.cli.create_container(
-                    image=self.image,
-                    command='app.py',
-                    ports=[5000],
-                    host_config=dc.cli.create_host_config(
-                        port_bindings={
-                            5000: [
-                                ('0.0.0.0', self.port)
-                            ]
-                        }
-                    )
-                )
+        """Build container."""
+        if self.is_valid and self.is_image_build and not self.is_container_build:
+            print('Building container...')
+            container = cli.create_container(image=self.image, command='app.py')
+            self.is_container_build = True
             self.container_id = container.get('Id')
             self.container_name = self.inspect().get('Name')
 
-            if self.container_id in [i['Id'] for i in dc.cli.containers(all=True)]:
-                self.is_container_built = True
-            else:
-                log.error('Container could not be found.')
-                raise DockerContainerException('Container could not be found in docker containers!')
-
     def remove_container(self):
-        """Remove container.
-        Check what OS application is running on.
-        Depending on OS remove port and put it back in port list.
-        Validate that container have been removed from docker land.
-        """
-        if self.is_container_built:
-            self.stop()
-            log.debug(self.image + 'removing container...')
-            if not dc.is_linux:
-                self.port = None
-                _available_ports.append(self.port)
-
-            dc.cli.remove_container(container=self.container_id, force=True)
-
-            if self.container_id not in [i['Id'] for i in dc.cli.containers(all=True)]:
-                self.container_id = None
-                self.container_name = None
-                self.is_container_built = False
-
-            else:
-                log.error('Container was not removed.')
-                raise DockerContainerException('Container is still found in docker containers!')
+        """Remove container."""
+        if self.is_container_build:
+            print('Removing container...')
+            cli.remove_container(container=self.container_id, force=True)
+            self.is_container_build = False
 
     def start(self):
-        """Start container.
-        Start container.
-        Validate that container is running in docker land.
-        """
-        if self.is_valid and self.is_image_built and self.is_container_built and not self.is_running:
-            log.debug(self.image + ' starting container...')
-            dc.cli.start(container=self.container_id)
-
-            if self.container_id in [i['Id'] for i in dc.cli.containers()]:
-                info = dc.cli.inspect_container(container=self.container_id)
-                self.is_running = True
-                if dc.is_linux:
-                    self.ip_address = info['NetworkSettings']['Networks']['bridge']['IPAddress']
-                else:
-                    self.ip_address = '192.168.99.100'
-            else:
-                log.error('Container could not be found in started docker containers')
-                raise DockerContainerException('Container could not be found in started docker containers')
+        """Start container."""
+        if self.is_valid and self.is_image_build and self.is_container_build and not self.is_running:
+            print('Starting container...')
+            cli.start(container=self.container_id)
+            info = cli.inspect_container(container=self.container_id)
+            self.is_running = True
+            self.ip_address = info['NetworkSettings']['Networks']['bridge']['IPAddress']
 
     def stop(self):
-        """Stop running container if running.
-        Validate that container is not running in docker land.
-        """
+        """Stop running container if running."""
         if self.is_running:
-            log.debug(self.image + ' stopping container...')
-            dc.cli.stop(container=self.container_id)
-            if self.container_id not in [i['Id'] for i in dc.cli.containers()]:
-                self.is_running = False
-            else:
-                log.error('Container could still be found in started docker containers')
-                raise DockerContainerException('Container could still be found in started docker containers')
+            print('Stopping container...')
+            cli.stop(container=self.container_id)
+            self.is_running = False
 
     def inspect(self):
         """Inspec running container.
         :return json obj
         """
-        return dc.cli.inspect_container(container=self.container_id)
+        return cli.inspect_container(container=self.container_id)
 
     def get_available_commands(self):
         """Returns the part of config.json that contains available commands.
@@ -288,4 +179,9 @@ class OwtfContainer(object):
             self.image_name,
             self.image_version
         )
+
+# For manual testing
+# if __name__ == '__main__':
+#     oc = OwtfContainer('containers/testcontainer')
+#     pprint.pprint(oc)
 

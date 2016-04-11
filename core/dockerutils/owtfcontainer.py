@@ -8,7 +8,7 @@ import os
 import pprint
 import json
 
-from dclient import *
+from .dclient import *
 
 
 class OwtfContainer(object):

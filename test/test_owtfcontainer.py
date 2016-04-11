@@ -1,13 +1,14 @@
 
 import unittest
-from owtfvalhalla.owtfcontainer import OwtfContainer
-from owtfvalhalla.owtfcontainer.dclient import *
+from core.dockerutils import OwtfContainer
+from core.dockerutils.dclient import *
 
+TEST_CONTAINER_PATH = '../containers/testcontainer'
 
 class OwtfContainerTest(unittest.TestCase):
 
     # def setUp(self):
-    #     oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+    #     oc = OwtfContainer('../core/containers/testcontainer')
     #     if oc.image_id in [i['Id'] for i in cli.images()]:
     #         oc.remove_image()
     #
@@ -15,7 +16,7 @@ class OwtfContainerTest(unittest.TestCase):
     #         oc.remove_container()
     #
     def tearDown(self):
-        oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+        oc = OwtfContainer(TEST_CONTAINER_PATH)
         if oc.image_id in [i['Id'] for i in cli.images()]:
             oc.remove_image()
 
@@ -23,22 +24,22 @@ class OwtfContainerTest(unittest.TestCase):
             oc.remove_container()
 
     def test_not_valid_false(self):
-        oc = OwtfContainer('../owtfvalhalla/containers/testcontainers')
+        oc = OwtfContainer('../core/containers/testcontainers')
         self.assertFalse(oc.is_valid)
 
     def test_validate_true(self):
-        oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+        oc = OwtfContainer(TEST_CONTAINER_PATH)
         self.assertTrue(oc.is_valid)
 
     def test_buildingimage_true(self):
-        oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+        oc = OwtfContainer(TEST_CONTAINER_PATH)
         self.assertTrue(oc.is_valid)
         oc.build_image()
         self.assertTrue(oc.is_image_build)
         self.assertTrue(oc.image_id in [i['Id'] for i in cli.images()])
 
     def test_removeimage_true(self):
-        oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+        oc = OwtfContainer(TEST_CONTAINER_PATH)
         oc.build_image()
         self.assertTrue(oc.is_image_build)
         oc.remove_image()
@@ -46,7 +47,7 @@ class OwtfContainerTest(unittest.TestCase):
         self.assertFalse(oc.image_id in [i['Id'] for i in cli.images()])
 
     def test_buildcontainer_true(self):
-        oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+        oc = OwtfContainer(TEST_CONTAINER_PATH)
         if oc.is_running and oc.is_container_build:
             oc.stop()
             self.assertFalse(oc.is_running)
@@ -59,7 +60,7 @@ class OwtfContainerTest(unittest.TestCase):
         self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
 
     def test_removecontainer_true(self):
-        oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+        oc = OwtfContainer(TEST_CONTAINER_PATH)
         if not oc.is_container_build:
             oc.build_image()
             oc.build_container()
@@ -70,7 +71,7 @@ class OwtfContainerTest(unittest.TestCase):
         self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
 
     def test_startcommandsstop_true(self):
-        oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+        oc = OwtfContainer(TEST_CONTAINER_PATH)
         oc.build_image()
         self.assertTrue(oc.is_image_build)
         oc.build_container()
@@ -85,11 +86,11 @@ class OwtfContainerTest(unittest.TestCase):
         self.assertFalse(oc.is_running)
 
     def test_running_container(self):
-        oc1 = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+        oc1 = OwtfContainer(TEST_CONTAINER_PATH)
         oc1.build_image()
         oc1.build_container()
         oc1.start()
-        oc = OwtfContainer('../owtfvalhalla/containers/testcontainer')
+        oc = OwtfContainer(TEST_CONTAINER_PATH)
         self.assertTrue(oc.is_valid)
         self.assertTrue(oc.is_image_build)
         self.assertTrue(oc.is_container_build)

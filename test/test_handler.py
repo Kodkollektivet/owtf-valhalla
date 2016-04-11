@@ -1,5 +1,5 @@
 import unittest
-from owtfvalhalla.owtfcontainer import *
+from core.dockerutils import *
 
 
 class OwtfContainerTest(unittest.TestCase):

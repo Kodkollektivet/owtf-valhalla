@@ -1,6 +1,5 @@
 import unittest
-from core.dockerutils import handler
-from core.dockerutils.owtfcontainer import OwtfContainer
+from core.dockerutils import *
 
 
 class OwtfContainerTest(unittest.TestCase):

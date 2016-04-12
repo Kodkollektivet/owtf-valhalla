@@ -8,11 +8,12 @@ The OwtfContainer object can interact with image/container,
 give IP address of running container, give all the information
 that is relevant to a container/image.
 """
+from .owtfcontainer import OwtfContainer
+from .handler import get_owtf_c
+
 
 __author__ = 'owtf-valhalla'
 
-from owtfcontainer import OwtfContainer
-from handler import get_owtf_c
 
 
 

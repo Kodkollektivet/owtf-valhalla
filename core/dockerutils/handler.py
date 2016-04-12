@@ -1,19 +1,18 @@
 import os
 import fnmatch
 
-from owtfcontainer import OwtfContainer
+from .owtfcontainer import OwtfContainer
 
 _containers = []
 
 
-def locate_owtf_containers():
+def locate_owtf_containers(location='containers'):
     """Locates the containers that lives inside of the container folder.
     The containers list the filled up with OwtfContainer objects.
-    """
-    print('In here')
-    print(os.path.abspath('.'))
-    for root, dirnames, filenames in os.walk('containers'):
 
+    location is only used for testing.
+    """
+    for root, dirnames, filenames in os.walk(location):
         for filename in fnmatch.filter(filenames, 'config.json'):
             if 'Dockerfile' and 'config.json' in filenames:
                 _containers.append(OwtfContainer(root))

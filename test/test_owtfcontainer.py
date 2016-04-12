@@ -1,113 +1,97 @@
-
 import unittest
+
 from core.dockerutils import OwtfContainer
 from core.dockerutils.dclient import *
 
-TEST_CONTAINER_PATH = '../containers/testcontainer'
 
 class OwtfContainerTest(unittest.TestCase):
+    """Integration tests for the OwtfContainer object.
+    This tests the basic functions of the OwtfContainer object:
+    Build image
+    Build container
+    Start
+    Stop
+    Remove container
+    Remove image
 
-    # def setUp(self):
-    #     oc = OwtfContainer('../core/containers/testcontainer')
-    #     if oc.image_id in [i['Id'] for i in cli.images()]:
-    #         oc.remove_image()
-    #
-    #     if oc.container_id in [i['Id'] for i in cli.containers(all=True)]:
-    #         oc.remove_container()
-    #
-    def tearDown(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        if oc.image_id in [i['Id'] for i in cli.images()]:
-            oc.remove_image()
+    The test will clean up the container and image of the testcontainer.
+    The test requires internet connection and can vary in time depending on
+    bandwith.
+    """
 
-        if oc.container_id in [i['Id'] for i in cli.containers(all=True)]:
+    def setUp(self):
+        """Remove all containers and images before """
+        self.container_location = 'containers/testcontainer'
+
+    def test_01_stop_remove_image_and_container(self):
+        oc = OwtfContainer(self.container_location)
+
+        oc.stop()
+        self.assertFalse(oc.is_running)
+
+        if oc.is_container_build:
             oc.remove_container()
+            self.assertFalse(oc.is_container_build)
 
-    def test_not_valid_false(self):
-        oc = OwtfContainer('../core/containers/testcontainers')
+        if oc.is_image_build:
+            oc.remove_image()
+            self.assertFalse(oc.is_image_build)
+
+        self.assertFalse(oc.is_image_build)
+        self.assertFalse(oc.is_container_build)
+        self.assertFalse(oc.image_id in [i['Id'] for i in cli.images()])
+        self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
+
+    def test_02_not_valid_location(self):
+        oc = OwtfContainer(self.container_location + 's')  # Wrong location
         self.assertFalse(oc.is_valid)
 
-    def test_validate_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
+    def test_03_validate_location(self):
+        oc = OwtfContainer(self.container_location)
         self.assertTrue(oc.is_valid)
 
-    def test_buildingimage_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
+    def test_04_build_image(self):
+        oc = OwtfContainer(self.container_location)
         self.assertTrue(oc.is_valid)
         oc.build_image()
         self.assertTrue(oc.is_image_build)
         self.assertTrue(oc.image_id in [i['Id'] for i in cli.images()])
 
-    def test_removeimage_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        oc.build_image()
+    def test_05_build_container(self):
+        oc = OwtfContainer(self.container_location)
         self.assertTrue(oc.is_image_build)
-        oc.remove_image()
-        self.assertFalse(oc.is_image_build)
-        self.assertFalse(oc.image_id in [i['Id'] for i in cli.images()])
-
-    def test_buildcontainer_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        if oc.is_running and oc.is_container_build:
-            oc.stop()
-            self.assertFalse(oc.is_running)
-            oc.remove_container()
-            self.assertFalse(oc.is_container_build)
-        oc.build_image()
-        self.assertTrue(oc.is_image_build)
+        self.assertFalse(oc.is_container_build)
         oc.build_container()
         self.assertTrue(oc.is_container_build)
         self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
 
-    def test_removecontainer_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        if not oc.is_container_build:
-            oc.build_image()
-            oc.build_container()
-            self.assertTrue(oc.is_image_build)
-            self.assertTrue(oc.is_container_build)
-        oc.remove_container()
-        self.assertFalse(oc.is_container_build)
-        self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
-
-    def test_startcommandsstop_true(self):
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        oc.build_image()
+    def test_06_start_contianer(self):
+        oc = OwtfContainer(self.container_location)
         self.assertTrue(oc.is_image_build)
-        oc.build_container()
         self.assertTrue(oc.is_container_build)
         oc.start()
         self.assertTrue(oc.is_running)
         self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers()])
-        commands = '[{"code": "666", "noise": "passive", "command": "sleep 5s", "target": "", "description": "Test"}]'
-        self.assertEqual(oc.get_available_commands(), commands)
-        oc.stop()
-        self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers()])
-        self.assertFalse(oc.is_running)
 
-    def test_running_container(self):
-        oc1 = OwtfContainer(TEST_CONTAINER_PATH)
-        oc1.build_image()
-        oc1.build_container()
-        oc1.start()
-        oc = OwtfContainer(TEST_CONTAINER_PATH)
-        self.assertTrue(oc.is_valid)
-        self.assertTrue(oc.is_image_build)
-        self.assertTrue(oc.is_container_build)
+    def test_07_stop_container(self):
+        oc = OwtfContainer(self.container_location)
         self.assertTrue(oc.is_running)
-        self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers()])
+        oc.stop()
+        self.assertFalse(oc.is_running)
+        self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers()])
+
+    def test_08_remove_image_and_container(self):
+        oc = OwtfContainer(self.container_location)
+        self.assertTrue(oc.is_container_build)
+        self.assertTrue(oc.is_image_build)
+        oc.remove_container()
+        self.assertFalse(oc.is_container_build)
+        self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
+        oc.remove_image()
+        self.assertFalse(oc.is_image_build)
+        self.assertFalse(oc.image_id in [i['Id'] for i in cli.images()])
+
 
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-
-
-
-
-
-
-
 

@@ -2,6 +2,13 @@
 
 ## This application is under heavy development
 
+## Slack
+
+You are more than welcome to join us in the Slack channel:
+
+[https://owtfvalhalla.slack.com/](https://owtfvalhalla.slack.com/)
+
+
 ## Dependencies
 * Python 2
 * docker-py 1.8.0rc4
@@ -59,8 +66,3 @@ python manage.py runserver
 
 Open browser and go to [http://127.0.0.1:8000/containers/](http://127.0.0.1:8000/containers/)
 
-## Todo
-
-- [ ] Fix logging
-- [ ] Get all basic container commands (start/stop/remove/build)
-- [ ] What happens if the application craches?

@@ -22,8 +22,8 @@ class OwtfContainerSerializer(serializers.Serializer):
 
     results = serializers.JSONField(required=False)
 
-    is_image_build = serializers.BooleanField()
-    is_container_build = serializers.BooleanField()
+    is_image_built = serializers.BooleanField()
+    is_container_built = serializers.BooleanField()
     is_valid = serializers.BooleanField()
     is_running = serializers.BooleanField()
 

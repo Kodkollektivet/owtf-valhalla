@@ -29,8 +29,8 @@ class OwtfContainer(object):
         self.config = None  # The config.json file in loaded in here
         self.ip_address = None  # Container ip address
 
-        self.is_image_build = False
-        self.is_container_build = False
+        self.is_image_built = False
+        self.is_container_built = False
         self.is_valid = False
         self.is_running = False
 
@@ -81,13 +81,13 @@ class OwtfContainer(object):
         # Check if image is build
         for image in cli.images():
             if self.image == image['RepoTags'][0]:
-                self.is_image_build = True
+                self.is_image_built = True
                 self.image_id = image['Id']
 
         # Check if container is build
         for container in cli.containers(all=True):
             if self.image_id == container['ImageID']:
-                self.is_container_build = True
+                self.is_container_built = True
                 self.container_id = container['Id']
                 self.container_name = self.inspect().get('Name')
 
@@ -101,40 +101,40 @@ class OwtfContainer(object):
 
     def build_image(self):
         """Build image."""
-        if self.is_valid and not self.is_image_build:
+        if self.is_valid and not self.is_image_built:
             print('Building image...')
             for log in cli.build(path=self.image_path, rm=True, tag=self.image):
                 print(log,)
-            self.is_image_build = True
+            self.is_image_built = True
             self.image_id = (i for i in cli.images() if i['RepoTags'][0] == self.image).next().get('Id')
 
     def remove_image(self):
         """Remove image."""
-        if self.is_image_build:
+        if self.is_image_built:
             print('Removing image...')
             cli.remove_image(image=self.image, force=True)
-            self.is_image_build = False
+            self.is_image_built = False
 
     # Container related methods
     def build_container(self):
         """Build container."""
-        if self.is_valid and self.is_image_build and not self.is_container_build:
+        if self.is_valid and self.is_image_built and not self.is_container_built:
             print('Building container...')
             container = cli.create_container(image=self.image, command='app.py')
-            self.is_container_build = True
+            self.is_container_built = True
             self.container_id = container.get('Id')
             self.container_name = self.inspect().get('Name')
 
     def remove_container(self):
         """Remove container."""
-        if self.is_container_build:
+        if self.is_container_built:
             print('Removing container...')
             cli.remove_container(container=self.container_id, force=True)
-            self.is_container_build = False
+            self.is_container_built = False
 
     def start(self):
         """Start container."""
-        if self.is_valid and self.is_image_build and self.is_container_build and not self.is_running:
+        if self.is_valid and self.is_image_built and self.is_container_built and not self.is_running:
             print('Starting container...')
             cli.start(container=self.container_id)
             info = cli.inspect_container(container=self.container_id)

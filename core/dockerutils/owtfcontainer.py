@@ -8,7 +8,10 @@ import os
 import pprint
 import json
 
-from .dclient import *
+from . import dclient as dc
+
+# List with ports that can be assigned to container
+_available_ports = [i for i in range(6000, 6100, 2)]
 
 
 class OwtfContainer(object):
@@ -28,6 +31,7 @@ class OwtfContainer(object):
 
         self.config = None  # The config.json file in loaded in here
         self.ip_address = None  # Container ip address
+        self.port = None  # Forwarding port in the container
 
         self.is_image_build = False
         self.is_container_build = False
@@ -79,23 +83,35 @@ class OwtfContainer(object):
             return
 
         # Check if image is build
-        for image in cli.images():
+        for image in dc.cli.images():
             if self.image == image['RepoTags'][0]:
                 self.is_image_build = True
                 self.image_id = image['Id']
 
         # Check if container is build
-        for container in cli.containers(all=True):
+        for container in dc.cli.containers(all=True):
             if self.image_id == container['ImageID']:
+
+                try:
+                    self.port = container['Ports'][0]['PublicPort']  # Assign the port.
+                    _available_ports.remove(self.port)  # Remove port from _available ports.
+                    # TODO: Add log message
+
+                except Exception as e:
+                    print(e)
+
                 self.is_container_build = True
                 self.container_id = container['Id']
                 self.container_name = self.inspect().get('Name')
 
         # Check if container is running
-        for container in cli.containers():
+        for container in dc.cli.containers():
             if self.container_id == container['Id']:
                 self.container_name = container['Names'][0]
-                self.ip_address = container['NetworkSettings']['Networks']['bridge']['IPAddress']
+                if dc.is_linux:
+                    self.ip_address = container['NetworkSettings']['Networks']['bridge']['IPAddress']
+                else:
+                    self.ip_address = '192.168.99.100'
                 self.is_running = True
         print('The OwtfContainer is valid!')
 
@@ -103,16 +119,16 @@ class OwtfContainer(object):
         """Build image."""
         if self.is_valid and not self.is_image_build:
             print('Building image...')
-            for log in cli.build(path=self.image_path, rm=True, tag=self.image):
+            for log in dc.cli.build(path=self.image_path, rm=True, tag=self.image):
                 print(log,)
             self.is_image_build = True
-            self.image_id = (i for i in cli.images() if i['RepoTags'][0] == self.image).next().get('Id')
+            self.image_id = [i for i in dc.cli.images() if self.image in i['RepoTags']][0].get('Id')
 
     def remove_image(self):
         """Remove image."""
         if self.is_image_build:
             print('Removing image...')
-            cli.remove_image(image=self.image, force=True)
+            dc.cli.remove_image(image=self.image, force=True)
             self.is_image_build = False
 
     # Container related methods
@@ -120,7 +136,19 @@ class OwtfContainer(object):
         """Build container."""
         if self.is_valid and self.is_image_build and not self.is_container_build:
             print('Building container...')
-            container = cli.create_container(image=self.image, command='app.py')
+            self.port = _available_ports.pop(0)
+            container = dc.cli.create_container(
+                image=self.image,
+                command='app.py',
+                ports=[5000],
+                host_config=dc.cli.create_host_config(
+                    port_bindings={
+                        5000: [
+                            ('0.0.0.0', self.port)
+                        ]
+                    }
+                )
+            )
             self.is_container_build = True
             self.container_id = container.get('Id')
             self.container_name = self.inspect().get('Name')
@@ -128,31 +156,36 @@ class OwtfContainer(object):
     def remove_container(self):
         """Remove container."""
         if self.is_container_build:
+            self.stop()
             print('Removing container...')
-            cli.remove_container(container=self.container_id, force=True)
+            _available_ports.append(self.port)
+            dc.cli.remove_container(container=self.container_id, force=True)
             self.is_container_build = False
 
     def start(self):
         """Start container."""
         if self.is_valid and self.is_image_build and self.is_container_build and not self.is_running:
             print('Starting container...')
-            cli.start(container=self.container_id)
-            info = cli.inspect_container(container=self.container_id)
+            dc.cli.start(container=self.container_id)
+            info = dc.cli.inspect_container(container=self.container_id)
             self.is_running = True
-            self.ip_address = info['NetworkSettings']['Networks']['bridge']['IPAddress']
+            if dc.is_linux:
+                self.ip_address = info['NetworkSettings']['Networks']['bridge']['IPAddress']
+            else:
+                self.ip_address = '192.168.99.100'
 
     def stop(self):
         """Stop running container if running."""
         if self.is_running:
             print('Stopping container...')
-            cli.stop(container=self.container_id)
+            dc.cli.stop(container=self.container_id)
             self.is_running = False
 
     def inspect(self):
         """Inspec running container.
         :return json obj
         """
-        return cli.inspect_container(container=self.container_id)
+        return dc.cli.inspect_container(container=self.container_id)
 
     def get_available_commands(self):
         """Returns the part of config.json that contains available commands.
@@ -179,9 +212,4 @@ class OwtfContainer(object):
             self.image_name,
             self.image_version
         )
-
-# For manual testing
-# if __name__ == '__main__':
-#     oc = OwtfContainer('containers/testcontainer')
-#     pprint.pprint(oc)
 

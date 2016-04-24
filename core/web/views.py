@@ -1,5 +1,5 @@
 from pprint import pprint
-import json
+import time
 
 from django.views.generic import TemplateView
 from django.http import HttpResponse
@@ -171,10 +171,11 @@ class Execute(APIView):
             image.build_image()
             image.build_container()
             image.start()
+            time.sleep(1)  # Wait for container to start
 
             request_data = serializers.CommandSerializer(data=request.data)
             if request_data.is_valid():
-                image.results.append(middleman.send_for_execution(image.ip_address, request_data.data))
+                image.results.append(middleman.send_for_execution(image.ip_address, image.port, request_data.data))
                 serializer = serializers.OwtfContainerSerializer(image)
                 return Response(serializer.data, status=status.HTTP_200_OK)
 

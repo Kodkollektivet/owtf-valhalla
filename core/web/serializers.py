@@ -19,6 +19,7 @@ class OwtfContainerSerializer(serializers.Serializer):
 
     config = serializers.JSONField()
     ip_address = serializers.CharField(max_length=254, required=False)
+    port = serializers.IntegerField(required=False)
 
     results = serializers.JSONField(required=False)
 

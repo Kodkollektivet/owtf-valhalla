@@ -10,12 +10,18 @@ from dclient import dclient as cli
 """
 from sys import platform
 
-if platform == "linux" or platform == "linux2":
+is_linux = False
+
+if "linux" in platform:
     from docker import Client
     cli = Client(base_url='unix://var/run/docker.sock')
+    is_linux = True
+
 else:
     import docker
     cli = docker.from_env(assert_hostname=False)
+
+print("Platform: " + platform)
 
 init_validate_containers = cli.containers(all=True)
 

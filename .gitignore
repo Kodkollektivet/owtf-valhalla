@@ -2,4 +2,3 @@ venv/
 db.sqlite3
 *.py[cod]
 .idea/
-owtfvalhalla/containers/

@@ -92,13 +92,16 @@ class OwtfContainer(object):
         for container in dc.cli.containers(all=True):
             if self.image_id == container['ImageID']:
 
-                try:
-                    self.port = container['Ports'][0]['PublicPort']  # Assign the port.
-                    _available_ports.remove(self.port)  # Remove port from _available ports.
-                    # TODO: Add log message
+                if dc.is_linux:
+                    self.port = 5000
+                else:
+                    try:
+                        self.port = container['Ports'][0]['PublicPort']  # Assign the port.
+                        _available_ports.remove(self.port)  # Remove port from _available ports.
+                        # TODO: Add log message
 
-                except Exception as e:
-                    print(e)
+                    except Exception as e:
+                        print(e)
 
                 self.is_container_build = True
                 self.container_id = container['Id']
@@ -136,19 +139,25 @@ class OwtfContainer(object):
         """Build container."""
         if self.is_valid and self.is_image_build and not self.is_container_build:
             print('Building container...')
-            self.port = _available_ports.pop(0)
-            container = dc.cli.create_container(
-                image=self.image,
-                command='app.py',
-                ports=[5000],
-                host_config=dc.cli.create_host_config(
-                    port_bindings={
-                        5000: [
-                            ('0.0.0.0', self.port)
-                        ]
-                    }
+
+            if dc.is_linux:
+                self.port = 5000
+                container = dc.cli.create_container(image=self.image, command='app.py')
+
+            else:
+                self.port = _available_ports.pop(0)
+                container = dc.cli.create_container(
+                    image=self.image,
+                    command='app.py',
+                    ports=[5000],
+                    host_config=dc.cli.create_host_config(
+                        port_bindings={
+                            5000: [
+                                ('0.0.0.0', self.port)
+                            ]
+                        }
+                    )
                 )
-            )
             self.is_container_build = True
             self.container_id = container.get('Id')
             self.container_name = self.inspect().get('Name')
@@ -158,7 +167,8 @@ class OwtfContainer(object):
         if self.is_container_build:
             self.stop()
             print('Removing container...')
-            _available_ports.append(self.port)
+            if not dc.is_linux:
+                _available_ports.append(self.port)
             dc.cli.remove_container(container=self.container_id, force=True)
             self.is_container_build = False
 

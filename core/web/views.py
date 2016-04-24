@@ -1,6 +1,5 @@
 from pprint import pprint
 import time
-import json
 
 from django.views.generic import TemplateView
 from django.http import HttpResponse
@@ -13,7 +12,7 @@ from rest_framework import status
 from web import serializers
 from middleman import handler as middleman
 
-from dockerutils import get_owtf_c, commands
+from dockerutils import get_owtf_c
 
 
 class IndexTemplateView(TemplateView):
@@ -149,14 +148,6 @@ class Stop(APIView):
             return HttpResponse('Failed!')
 
 
-class Commands(APIView):
-    """Get a command and the pass it on to the associated container"""
-
-    def get(self, request, *args, **kwargs):
-        serializer = serializers.CodeSerializer(commands, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
 class Execute(APIView):
     """Get a command and the pass it on to the associated container"""
 
@@ -184,7 +175,7 @@ class Execute(APIView):
 
             request_data = serializers.CommandSerializer(data=request.data)
             if request_data.is_valid():
-                image.results.append(middleman.send_for_execution(image, request_data.data))
+                image.results.append(middleman.send_for_execution(image.ip_address, image.port, request_data.data))
                 serializer = serializers.OwtfContainerSerializer(image)
                 return Response(serializer.data, status=status.HTTP_200_OK)
 

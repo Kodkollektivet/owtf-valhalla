@@ -45,13 +45,13 @@ def get_owtf_c(image=None, image_id=None, container_id=None):
 
     elif image_id is not None:
         for image in _containers:
-            if image_id == image['image_id']:
+            if image_id == image.image_id:
                 return True, image
         return False, None
 
     elif container_id is not None:
         for container in _containers:
-            if container_id == container['container_id']:
+            if container_id == container.container_id:
                 return True, container
         return False, None
 

@@ -29,16 +29,16 @@ class OwtfContainerTest(unittest.TestCase):
         oc.stop()
         self.assertFalse(oc.is_running)
 
-        if oc.is_container_build:
+        if oc.is_container_built:
             oc.remove_container()
-            self.assertFalse(oc.is_container_build)
+            self.assertFalse(oc.is_container_built)
 
-        if oc.is_image_build:
+        if oc.is_image_built:
             oc.remove_image()
-            self.assertFalse(oc.is_image_build)
+            self.assertFalse(oc.is_image_built)
 
-        self.assertFalse(oc.is_image_build)
-        self.assertFalse(oc.is_container_build)
+        self.assertFalse(oc.is_image_built)
+        self.assertFalse(oc.is_container_built)
         self.assertFalse(oc.image_id in [i['Id'] for i in cli.images()])
         self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
 
@@ -54,21 +54,21 @@ class OwtfContainerTest(unittest.TestCase):
         oc = OwtfContainer(self.container_location)
         self.assertTrue(oc.is_valid)
         oc.build_image()
-        self.assertTrue(oc.is_image_build)
+        self.assertTrue(oc.is_image_built)
         self.assertTrue(oc.image_id in [i['Id'] for i in cli.images()])
 
     def test_05_build_container(self):
         oc = OwtfContainer(self.container_location)
-        self.assertTrue(oc.is_image_build)
-        self.assertFalse(oc.is_container_build)
+        self.assertTrue(oc.is_image_built)
+        self.assertFalse(oc.is_container_built)
         oc.build_container()
-        self.assertTrue(oc.is_container_build)
+        self.assertTrue(oc.is_container_built)
         self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
 
     def test_06_start_contianer(self):
         oc = OwtfContainer(self.container_location)
-        self.assertTrue(oc.is_image_build)
-        self.assertTrue(oc.is_container_build)
+        self.assertTrue(oc.is_image_built)
+        self.assertTrue(oc.is_container_built)
         oc.start()
         self.assertTrue(oc.is_running)
         self.assertTrue(oc.container_id in [i['Id'] for i in cli.containers()])
@@ -82,13 +82,13 @@ class OwtfContainerTest(unittest.TestCase):
 
     def test_08_remove_image_and_container(self):
         oc = OwtfContainer(self.container_location)
-        self.assertTrue(oc.is_container_build)
-        self.assertTrue(oc.is_image_build)
+        self.assertTrue(oc.is_container_built)
+        self.assertTrue(oc.is_image_built)
         oc.remove_container()
-        self.assertFalse(oc.is_container_build)
+        self.assertFalse(oc.is_container_built)
         self.assertFalse(oc.container_id in [i['Id'] for i in cli.containers(all=True)])
         oc.remove_image()
-        self.assertFalse(oc.is_image_build)
+        self.assertFalse(oc.is_image_built)
         self.assertFalse(oc.image_id in [i['Id'] for i in cli.images()])
 
 

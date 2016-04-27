@@ -34,7 +34,8 @@ function start {
 function test {
   echo "Running nosetests..."
   #nosetests-2.7 -q -w test/
-  python -m unittest discover -v
+  #python -m unittest discover -v
+  python core/manage.py test
 }
 
 if [[ $# > 1 ]]; then

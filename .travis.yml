@@ -1,14 +1,21 @@
 sudo: required
+
 language: python
+
 python:
   - "2.7"
 
-# command to install dependencies
-install: "pip install -r requirements.txt"
-# command to run tests
-script: nosetests
+services:
+  - docker
 
-# Whitelist branches
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" docker-engine=1.10.1-0~trusty
+
+install: pip install -r requirements.txt
+
+script: python core/manage.py test
+
 branches:
   only:
     - master

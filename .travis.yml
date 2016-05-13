@@ -19,5 +19,3 @@ script: python core/manage.py test
 branches:
   only:
     - master
-    - travis
-

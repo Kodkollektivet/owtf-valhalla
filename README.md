@@ -1,6 +1,6 @@
 # OWTF-Valhalla
 
-https://travis-ci.org/Kodkollektivet/owtf-valhalla.svg?branch=master
+![travis](https://travis-ci.org/Kodkollektivet/owtf-valhalla.svg?branch=master)
 
 ## This application is under heavy development
 

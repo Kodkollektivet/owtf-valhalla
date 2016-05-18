@@ -8,6 +8,8 @@ import os
 import pprint
 import json
 import logging
+from core.exceptions.DockerImageException import DockerImageException
+from core.exceptions.DockerContainerException import DockerContainerException
 from . import dclient as dc
 
 # List with ports that can be assigned to container
@@ -54,17 +56,17 @@ class OwtfContainer(object):
         log.debug('Validating: ' + self.image_path)
         if not os.path.isdir(self.image_path):
             self.is_valid = False
-            log.debug('Cant find container dir! NOT VALID!')
+            log.debug('Can\'t find container dir! NOT VALID!')
             return
 
         elif not os.path.isfile(os.path.join(self.image_path, 'config.json')):
             self.is_valid = False
-            log.debug('Cant find config.json! NOT VALID!')
+            log.debug('Can\'t find config.json! NOT VALID!')
             return
 
         elif not os.path.isfile(os.path.join(self.image_path, 'Dockerfile')):
             self.is_valid = False
-            log.debug('Cant find Dockerfile! NOT VALID!')
+            log.debug('Can\'t find Dockerfile! NOT VALID!')
             return
 
         else:
@@ -79,11 +81,12 @@ class OwtfContainer(object):
                 self.image_name = self.config['title']
                 self.image_version = self.config['version']
                 self.image = self.image_name.lower() + ':' + self.image_version  # Docker wants this
-                log.debug('Inpection OK.')
+                log.debug('Inspection OK.')
 
         except ValueError as e:
             self.is_valid = False
-            log.debug('config.json is not valid!')
+            # a bit more informative error, tells where the error was in JSON
+            log.debug('config.json is not valid!\n\t' + e.message)
             return
 
         # Check if image is built
@@ -107,9 +110,10 @@ class OwtfContainer(object):
                     except Exception as e:
                         log.debug(e)
 
-                self.is_container_built = True
-                self.container_id = container['Id']
-                self.container_name = self.inspect().get('Name')
+                    else: # if no exception then do stuff
+                        self.is_container_built = True
+                        self.container_id = container['Id']
+                        self.container_name = self.inspect().get('Name')
 
         # Check if container is running
         for container in dc.cli.containers():
@@ -144,7 +148,7 @@ class OwtfContainer(object):
 
             else:
                 log.error('Could not find the built image!')
-                raise Exception('Failed to build image!')
+                raise DockerImageException('Failed to build image!')
 
     def remove_image(self):
         """Remove image.
@@ -157,7 +161,7 @@ class OwtfContainer(object):
                 self.is_image_built = False
             else:
                 log.error('Image was not removed!')
-                raise Exception('Failed to remove image!')
+                raise DockerImageException('Failed to remove image!')
 
     # Container related methods
     def build_container(self):
@@ -195,7 +199,7 @@ class OwtfContainer(object):
                 self.is_container_built = True
             else:
                 log.error('Container could not be found.')
-                raise Exception('Container could not be found in docker containers!')
+                raise DockerContainerException('Container could not be found in docker containers!')
 
     def remove_container(self):
         """Remove container.
@@ -219,7 +223,7 @@ class OwtfContainer(object):
 
             else:
                 log.error('Container was not removed.')
-                raise Exception('Container is still found in docker containers!')
+                raise DockerContainerException('Container is still found in docker containers!')
 
     def start(self):
         """Start container.
@@ -239,7 +243,7 @@ class OwtfContainer(object):
                     self.ip_address = '192.168.99.100'
             else:
                 log.error('Container could not be found in started docker containers')
-                raise Exception('Container could not be found in started docker containers')
+                raise DockerContainerException('Container could not be found in started docker containers')
 
     def stop(self):
         """Stop running container if running.
@@ -252,7 +256,7 @@ class OwtfContainer(object):
                 self.is_running = False
             else:
                 log.error('Container could still be found in started docker containers')
-                raise Exception('Container could still be found in started docker containers')
+                raise DockerContainerException('Container could still be found in started docker containers')
 
     def inspect(self):
         """Inspec running container.

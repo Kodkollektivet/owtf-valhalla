@@ -110,7 +110,7 @@ class OwtfContainer(object):
                     except Exception as e:
                         log.debug(e)
 
-                    else: # if no exception then do stuff
+                    finally: # do nevertheless
                         self.is_container_built = True
                         self.container_id = container['Id']
                         self.container_name = self.inspect().get('Name')

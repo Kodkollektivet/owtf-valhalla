@@ -110,10 +110,10 @@ class OwtfContainer(object):
                     except Exception as e:
                         log.debug(e)
 
-                    finally: # do nevertheless
-                        self.is_container_built = True
-                        self.container_id = container['Id']
-                        self.container_name = self.inspect().get('Name')
+
+                self.is_container_built = True
+                self.container_id = container['Id']
+                self.container_name = self.inspect().get('Name')
 
         # Check if container is running
         for container in dc.cli.containers():

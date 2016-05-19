@@ -8,8 +8,7 @@ import os
 import pprint
 import json
 import logging
-from core.exceptions.DockerImageException import DockerImageException
-from core.exceptions.DockerContainerException import DockerContainerException
+from .exceptions import DockerContainerException, DockerImageException
 from . import dclient as dc
 
 # List with ports that can be assigned to container

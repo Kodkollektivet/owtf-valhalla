@@ -8,7 +8,6 @@ from .owtfcontainer import OwtfContainer
 _containers = []
 commands = []
 
-
 def locate_owtf_containers(location='containers'):
     """Locates the containers that lives inside of the container folder.
     The containers list the filled up with OwtfContainer objects.
@@ -79,3 +78,4 @@ def get_owtf_c(image=None, image_id=None, container_id=None):
 
     else:
         return True, _containers
+

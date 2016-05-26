@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^containers/buildall/$', views.BuildAll.as_view()),
     url(r'^containers/rebuildall/$', views.RebuildAll.as_view()),
     url(r'^containers/stopall/$', views.StopAll.as_view()),
+    url(r'^containers/commands/$', views.Commands.as_view()),    
     url(r'^containers/(?P<image>[a-zA-z0-9:.]+)/$', views.Info.as_view()),
     url(r'^containers/(?P<image>[a-zA-z0-9:.]+)/build_image/$', views.BuildImage.as_view()),
     url(r'^containers/(?P<image>[a-zA-z0-9:.]+)/remove_image/$', views.RemoveImage.as_view()),

@@ -1,10 +1,12 @@
 import os
 import fnmatch
+import json
+from pprint import pprint
 
 from .owtfcontainer import OwtfContainer
 
 _containers = []
-
+_owtf_code_dict = {}
 
 def locate_owtf_containers(location='containers'):
     """Locates the containers that lives inside of the container folder.
@@ -17,7 +19,17 @@ def locate_owtf_containers(location='containers'):
             if 'Dockerfile' and 'config.json' in filenames:
                 _containers.append(OwtfContainer(root))
 
+
+def aggregate_owtf_codes():
+    for container in _containers:
+        for command in container.config['commands']:
+            code = command['code']
+            command['image'] = container.image
+            _owtf_code_dict.setdefault(code, []).append(command)
+
+            
 locate_owtf_containers()
+aggregate_owtf_codes()
 
 
 def get_owtf_c(image=None, image_id=None, container_id=None):
@@ -58,6 +70,4 @@ def get_owtf_c(image=None, image_id=None, container_id=None):
     else:
         return True, _containers
 
-
-
-
+    

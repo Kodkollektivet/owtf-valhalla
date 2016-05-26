@@ -9,7 +9,7 @@ give IP address of running container, give all the information
 that is relevant to a container/image.
 """
 from .owtfcontainer import OwtfContainer
-from .handler import get_owtf_c
+from .handler import get_owtf_c, _owtf_code_dict
 
 
 __author__ = 'owtf-valhalla'

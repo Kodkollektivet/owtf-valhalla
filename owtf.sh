@@ -28,7 +28,7 @@ function init {
 
 function start {
   printf "Starting Offensive Web Testing Framework - Valhalla...\n"
-  python $MANAGE_PY runserver
+  python $MANAGE_PY runserver 0.0.0.0:8000
 }
 
 function test {

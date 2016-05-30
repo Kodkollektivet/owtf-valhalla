@@ -1,14 +1,18 @@
 
 ## JSON Rest API endpoints
 
-List all containers
+----------------------------------------------------------------------------------------
+
+### List all containers
 
 ```bash
 GET
 container/
 ```
 
-Info about image/container
+----------------------------------------------------------------------------------------
+
+### Info about image/container
 
 ```bash
 GET
@@ -18,7 +22,9 @@ Example:
 /containers/owtfvalhallatestcontainer:0.1/
 ```
 
-Build image
+----------------------------------------------------------------------------------------
+
+### Build image
 
 ```bash
 GET
@@ -28,8 +34,9 @@ Example:
 /containers/owtfvalhallatestcontainer:0.1/build_image/
 ```
 
+----------------------------------------------------------------------------------------
 
-Remove image
+### Remove image
 
 ```bash
 GET
@@ -39,8 +46,9 @@ Example:
 /containers/owtfvalhallatestcontainer:0.1/remove_image/
 ```
 
+----------------------------------------------------------------------------------------
 
-Build container
+### Build container
 
 ```bash
 GET
@@ -50,7 +58,9 @@ Example:
 /containers/owtfvalhallatestcontainer:0.1/build_container/
 ```
 
-Remove container
+----------------------------------------------------------------------------------------
+
+### Remove container
 
 ```bash
 GET
@@ -60,8 +70,9 @@ Example:
 /containers/owtfvalhallatestcontainer:0.1/remove_container/
 ```
 
+----------------------------------------------------------------------------------------
 
-Start container
+### Start container
 
 ```bash
 GET
@@ -71,8 +82,9 @@ Example:
 /containers/owtfvalhallatestcontainer:0.1/start/
 ```
 
+----------------------------------------------------------------------------------------
 
-Stop container
+### Stop container
 
 ```bash
 GET
@@ -80,6 +92,16 @@ container/<IMAGE>/stop/
 
 Example:
 /containers/owtfvalhallatestcontainer:0.1/stop/
+```
+
+
+----------------------------------------------------------------------------------------
+
+### Available commands
+
+```bash
+GET
+container/commands
 ```
 
 

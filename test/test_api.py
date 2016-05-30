@@ -58,3 +58,17 @@ class TestApiContainerObject(APITestCase):
         self.assertEquals(response.data['image'], 'owtfvalhallatestcontainer:0.1')
         self.assertFalse(response.data['is_image_built'])
 
+
+class TestApiCommandsObject(APITestCase):
+    """Test api conainer json objects."""
+
+    def test_1_test_command_endpoint_status(self):
+        response = self.client.get('/containers/commands/')
+        self.assertEquals(response.status_code, 200)
+
+    def test_2_test_command_endpoint_data(self):
+        response = self.client.get('/containers/commands/')
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.data['666'][0]['code'], '666')
+        self.assertEquals(response.data['666'][0]['image'], 'owtfvalhallatestcontainer:0.1')
+

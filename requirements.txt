@@ -1,5 +1,5 @@
 django
-docker-py==1.8.0rc5
+docker-py==1.8.1
 requests
 djangorestframework
 markdown

@@ -13,7 +13,7 @@ from rest_framework import status
 from web import serializers
 from middleman import handler as middleman
 
-from dockerutils import get_owtf_c, _owtf_code_dict
+from dockerutils import get_owtf_c, commands
 
 
 class IndexTemplateView(TemplateView):
@@ -154,7 +154,7 @@ class Commands(APIView):
 
     def get(self, request, *args, **kwargs):
         
-        return Response(_owtf_code_dict, status=status.HTTP_200_OK)
+        return Response(commands, status=status.HTTP_200_OK)
 
         
 class Execute(APIView):

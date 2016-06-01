@@ -71,4 +71,3 @@ class TestApiCommandsObject(APITestCase):
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response.data[0]['code'], '666')
         self.assertEquals(response.data[0]['commands'][0]['image'], 'owtfvalhallatestcontainer:0.1')
-

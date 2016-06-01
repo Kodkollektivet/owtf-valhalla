@@ -70,4 +70,8 @@ class TestApiCommandsObject(APITestCase):
         response = self.client.get('/containers/commands/')
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response.data[0]['code'], '666')
+<<<<<<< c234f5bb9510534bea38203ff457e7a57b123be3
         self.assertEquals(response.data[0]['commands'][0]['image'], 'owtfvalhallatestcontainer:0.1')
+=======
+        self.assertEquals(response.data[0]['image'], 'owtfvalhallatestcontainer:0.1')
+>>>>>>> Restructured command list API response to be just a list of command objects instead of an object itself where every command is a field with the code as a name. The reason for this being that the React component in the client should be able to iterate it as an array of objects

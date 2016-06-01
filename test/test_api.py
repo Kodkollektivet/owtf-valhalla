@@ -69,6 +69,5 @@ class TestApiCommandsObject(APITestCase):
     def test_2_test_command_endpoint_data(self):
         response = self.client.get('/containers/commands/')
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(response.data['666'][0]['code'], '666')
-        self.assertEquals(response.data['666'][0]['image'], 'owtfvalhallatestcontainer:0.1')
-
+        self.assertEquals(response.data[0]['code'], '666')
+        self.assertEquals(response.data[0]['image'], 'owtfvalhallatestcontainer:0.1')

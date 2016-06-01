@@ -7,6 +7,10 @@ from .owtfcontainer import OwtfContainer
 
 _containers = []
 commands = []
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2fd6149... Restructured command list API response to be just a list of command objects instead of an object itself where every command is a field with the code as a name. The reason for this being that the React component in the client should be able to iterate it as an array of objects
 
 def locate_owtf_containers(location='containers'):
     """Locates the containers that lives inside of the container folder.
@@ -31,10 +35,15 @@ def aggregate_owtf_codes():
         for command in container.config['commands']:
             code = command['code']
             command['image'] = container.image
+<<<<<<< HEAD
             commandDict.setdefault(code, []).append(command)
     for key, value in commandDict.iteritems():
         codeDict = {'code': key, 'commands': value}
         commands.append(codeDict)
+=======
+            commands.append(command)
+
+>>>>>>> 2fd6149... Restructured command list API response to be just a list of command objects instead of an object itself where every command is a field with the code as a name. The reason for this being that the React component in the client should be able to iterate it as an array of objects
 
 locate_owtf_containers()
 aggregate_owtf_codes()

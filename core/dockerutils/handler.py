@@ -36,7 +36,6 @@ def aggregate_owtf_codes():
         codeDict = {'code': key, 'commands': value}
         commands.append(codeDict)
 
-
 locate_owtf_containers()
 aggregate_owtf_codes()
 
@@ -78,4 +77,3 @@ def get_owtf_c(image=None, image_id=None, container_id=None):
 
     else:
         return True, _containers
-

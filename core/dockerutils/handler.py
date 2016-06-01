@@ -37,6 +37,7 @@ def aggregate_owtf_codes():
         codeDict = {'code': key, 'commands': value}
         commands.append(codeDict)
 
+
 locate_owtf_containers()
 aggregate_owtf_codes()
 

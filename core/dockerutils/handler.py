@@ -31,10 +31,15 @@ def aggregate_owtf_codes():
         for command in container.config['commands']:
             code = command['code']
             command['image'] = container.image
+<<<<<<< c234f5bb9510534bea38203ff457e7a57b123be3
             commandDict.setdefault(code, []).append(command)
     for key, value in commandDict.iteritems():
         codeDict = {'code': key, 'commands': value}
         commands.append(codeDict)
+=======
+            commands.append(command)
+
+>>>>>>> Restructured command list API response to be just a list of command objects instead of an object itself where every command is a field with the code as a name. The reason for this being that the React component in the client should be able to iterate it as an array of objects
 
 locate_owtf_containers()
 aggregate_owtf_codes()

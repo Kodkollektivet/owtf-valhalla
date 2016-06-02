@@ -14,12 +14,9 @@ before_install:
 
 install: pip install -r requirements.txt
 
-<<<<<<< 8344a0ba4e11821efd817319574609fcf3d53e99
-script: ./owtf.sh test
-=======
-install: python ./owtf.sh setup
+before_script: python ./owtf.sh setup
+
 script: python ./owtf.sh test
->>>>>>> Fixed travis install and test script calls
 
 branches:
   only:

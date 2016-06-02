@@ -14,7 +14,8 @@ before_install:
 
 install: pip install -r requirements.txt
 
-script: python core/manage.py test
+install: python ./owtf.sh setup
+script: python ./owtf.sh test
 
 branches:
   only:

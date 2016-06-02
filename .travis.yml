@@ -14,8 +14,6 @@ before_install:
 
 install: pip install -r requirements.txt
 
-before_script: python ./owtf.sh setup
-
 script: python ./owtf.sh test
 
 branches:

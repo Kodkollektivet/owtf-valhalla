@@ -29,7 +29,7 @@ def checkEmptyValues(key):
             print(key, value)
             if not value:
                 file.write("Command: "+str(i['code'])+" The Key "+str(key)+" has no value\n")
-                print "no value in the key"
+                print("no value in the key")
 
 
 checkEmptyValues("sad")

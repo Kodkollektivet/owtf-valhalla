@@ -4,15 +4,8 @@
   "description": "Nmap Container",
   "commands": [
     {
-      "noise": "active",
-      "code": "OTG-INFO-004",
-      "command": "nmap -PN -sT -sV -p0-65535 @@@HOST@@@",
-      "target": "?",
-      "description": "TCP connect scan that tries to determine a service to port relationship"
-    },
-    {
       "noise": "?",
-      "code": "OTG-INFO-002",
+      "code": "?",
       "command": "nmap -sP @@@HOST@@@",
       "target": "",
       "description": "Ping Scan, detect if host is online."
@@ -20,23 +13,30 @@
     {
       "noise": "?",
       "code": "?",
+      "command": "nmap -sV -p 22,53,110,143,4564 @@@HOST@@@",
+      "target": "?",
+      "description": "?"
+    },
+    {
+      "noise": "?",
+      "code": "?",
       "command": "nmap --top-ports 1000 @@@HOST@@@",
       "target": "?",
-      "description": "Portscans via the top-ports script on the top 1000 most common ports"
+      "description": "?"
     },
     {
       "noise": "?",
       "code": "?",
       "command": "nmap -P0 @@@HOST@@@",
       "target": "?",
-      "description": "IP protocol ping to detect if the host is online"
+      "description": "?"
     },
     {
       "noise": "?",
       "code": "?",
       "command": "nmap -sS -P0 -sV -O @@@HOST@@@",
       "target": "?",
-      "description": "Half-open, IP protocol ping, half-open"
+      "description": "?"
     },
     {
       "noise": "?",
@@ -53,11 +53,11 @@
       "description": "?"
     },
     {
-      "noise": "active",
+      "noise": "?",
       "code": "?",
-      "command": "nmap --script=default @@@HOST@@@",
+      "command": "nmap --script default @@@HOST@@@",
       "target": "?",
-      "description": "runs the default scripts "
+      "description": "?"
     }
   ]
 }

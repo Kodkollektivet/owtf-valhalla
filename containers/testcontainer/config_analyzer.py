@@ -8,7 +8,7 @@ config = json.loads(u)
 file = open('config_analyzer_log.txt', 'w+')
 
 #Function that checks if there is duplicated codes (Ex. OTG-INFO-004) in the configuration file
-def checkDuplicateCodes(key):
+def checkDuplicateCodes():
     file.write("Checking duplicate codes...\n")
     for i in config['commands']:
         x.append(i['code'])
@@ -22,7 +22,7 @@ def checkDuplicateCodes(key):
 
 #Function that checks if there is commands with keys that have no values
 #in the configuration file
-def checkEmptyValues(key):
+def checkEmptyValues():
     file.write("Checking empty key-values...\n")
     for i in config['commands']:
         for key, value in i.iteritems():
@@ -32,8 +32,8 @@ def checkEmptyValues(key):
                 print("no value in the key")
 
 
-checkEmptyValues("sad")
-checkDuplicateCodes("key")
+checkEmptyValues()
+checkDuplicateCodes()
 
 
 

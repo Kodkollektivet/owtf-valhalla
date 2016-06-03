@@ -184,7 +184,7 @@ class Execute(APIView):
 
             request_data = serializers.CommandSerializer(data=request.data)
             if request_data.is_valid():
-                image.results.append(middleman.send_for_execution(image.ip_address, image.port, request_data.data))
+                image.results.append(middleman.send_for_execution(image, request_data.data))
                 serializer = serializers.OwtfContainerSerializer(image)
                 return Response(serializer.data, status=status.HTTP_200_OK)
 

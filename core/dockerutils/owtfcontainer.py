@@ -8,6 +8,9 @@ import os
 import pprint
 import json
 import logging
+
+from django.core.urlresolvers import reverse, reverse_lazy, resolve
+
 from .exceptions import DockerContainerException, DockerImageException
 from . import dclient as dc
 
@@ -45,6 +48,17 @@ class OwtfContainer(object):
         self.results = []
 
         self._validate_config_image_and_container()  # Start the validation
+
+        # Lazy urls
+        self.build_url = reverse_lazy('build', args=[self.image])
+        self.remove_url = reverse_lazy('remove', args=[self.image])
+        self.build_image_url = reverse_lazy('build_image', args=[self.image])
+        self.remove_image_url = reverse_lazy('remove_image', args=[self.image])
+        self.build_container_url = reverse_lazy('build_container', args=[self.image])
+        self.remove_container_url = reverse_lazy('remove_container', args=[self.image])
+        self.start_url = reverse_lazy('start', args=[self.image])
+        self.stop_url = reverse_lazy('stop', args=[self.image])
+        self.execute_url = reverse_lazy('execute', args=[self.image])
 
     def _validate_config_image_and_container(self):
         """Internal validator

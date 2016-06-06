@@ -26,12 +26,15 @@ def aggregate_owtf_codes():
     assembles the commands from each of the
     container.
     """
+    commandDict = {}
     for container in _containers:
         for command in container.config['commands']:
             code = command['code']
             command['image'] = container.image
-            commands.append(command)
-
+            commandDict.setdefault(code, []).append(command)
+    for key, value in commandDict.iteritems():
+        codeDict = {'code': key, 'commands': value}
+        commands.append(codeDict)
 
 locate_owtf_containers()
 aggregate_owtf_codes()

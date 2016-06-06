@@ -156,7 +156,6 @@ class Commands(APIView):
         serializer = serializers.CodeSerializer(commands, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
 class Execute(APIView):
     """Get a command and the pass it on to the associated container"""
 

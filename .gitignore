@@ -1,5 +1,6 @@
+
 venv/
 db.sqlite3
 *.py[cod]
 .idea/
-log
+log/

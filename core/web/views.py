@@ -148,15 +148,15 @@ class Stop(APIView):
         else:
             return HttpResponse('Failed!')
 
-        
+
 class Commands(APIView):
     """Get a command and the pass it on to the associated container"""
 
     def get(self, request, *args, **kwargs):
-        
+
         return Response(commands, status=status.HTTP_200_OK)
 
-        
+
 class Execute(APIView):
     """Get a command and the pass it on to the associated container"""
 

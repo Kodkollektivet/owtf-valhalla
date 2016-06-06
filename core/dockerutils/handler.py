@@ -31,8 +31,10 @@ def aggregate_owtf_codes():
         for command in container.config['commands']:
             code = command['code']
             command['image'] = container.image
-            commands.append(command)
-
+            commandDict.setdefault(code, []).append(command)
+    for key, value in commandDict.iteritems():
+        codeDict = {'code': key, 'commands': value}
+        commands.append(codeDict)
 
 locate_owtf_containers()
 aggregate_owtf_codes()

@@ -1,0 +1,63 @@
+{
+  "title": "nmap",
+  "version": "0.1",
+  "description": "Nmap Container",
+  "commands": [
+    {
+      "noise": "?",
+      "code": "?",
+      "command": "nmap -sP @@@HOST@@@",
+      "target": "",
+      "description": "Ping Scan, detect if host is online."
+    },
+    {
+      "noise": "?",
+      "code": "?",
+      "command": "nmap -sV -p 22,53,110,143,4564 @@@HOST@@@",
+      "target": "?",
+      "description": "?"
+    },
+    {
+      "noise": "?",
+      "code": "?",
+      "command": "nmap --top-ports 1000 @@@HOST@@@",
+      "target": "?",
+      "description": "?"
+    },
+    {
+      "noise": "?",
+      "code": "?",
+      "command": "nmap -P0 @@@HOST@@@",
+      "target": "?",
+      "description": "?"
+    },
+    {
+      "noise": "?",
+      "code": "?",
+      "command": "nmap -sS -P0 -sV -O @@@HOST@@@",
+      "target": "?",
+      "description": "?"
+    },
+    {
+      "noise": "?",
+      "code": "?",
+      "command": "nmap -p 80 --script hostmap-bfk.nse @@@HOST@@@",
+      "target": "?",
+      "description": "?"
+    },
+    {
+      "noise": "?",
+      "code": "?",
+      "command": "nmap --traceroute --script traceroute-geolocation.nse -p 80 @@@HOST@@@",
+      "target": "?",
+      "description": "?"
+    },
+    {
+      "noise": "?",
+      "code": "?",
+      "command": "nmap --script default @@@HOST@@@",
+      "target": "?",
+      "description": "?"
+    }
+  ]
+}

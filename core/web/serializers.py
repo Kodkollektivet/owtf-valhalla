@@ -28,6 +28,17 @@ class OwtfContainerSerializer(serializers.Serializer):
     is_valid = serializers.BooleanField()
     is_running = serializers.BooleanField()
 
+    # Lazy urls
+    build_url = serializers.URLField(required=True)
+    remove_url = serializers.URLField(required=False)
+    build_image_url = serializers.URLField(required=True)
+    remove_image_url = serializers.URLField(required=False)
+    build_container_url = serializers.URLField(required=False)
+    remove_container_url = serializers.URLField(required=False)
+    start_url = serializers.URLField(required=False)
+    stop_url = serializers.URLField(required=False)
+    execute_url = serializers.URLField(required=False)
+
 
 class CommandSerializer(serializers.Serializer):
     """This is the serializer for the commands that we receive through the Rest API.

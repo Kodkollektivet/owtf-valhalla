@@ -53,6 +53,44 @@ class Info(APIView):
             return HttpResponse('Failed!')
 
 
+class Build(APIView):
+    """Build image"""
+
+    def get(self, request, image, *args, **kwargs):
+
+        image_status, image = get_owtf_c(image=image)
+
+        if image_status:
+            image.build_image()
+            time.sleep(1)
+            image.build_container()
+            serializer = serializers.OwtfContainerSerializer(image)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return HttpResponse('Failed!')
+
+
+class Remove(APIView):
+    """Build image"""
+
+    def get(self, request, image, *args, **kwargs):
+
+        image_status, image = get_owtf_c(image=image)
+
+        if image_status:
+            image.stop()  # Stop if running
+            time.sleep(0.5)  # Sleep 0.5 sec
+            image.remove_container()  # Remove container
+            time.sleep(0.5)  # Sleep 0.5 sec
+            image.remove_image()  # Remove image
+            serializer = serializers.OwtfContainerSerializer(image)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return HttpResponse('Failed!')
+
+
 class BuildImage(APIView):
     """Build image"""
 

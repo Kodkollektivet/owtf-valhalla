@@ -28,7 +28,6 @@ class OwtfContainerSerializer(serializers.Serializer):
     is_valid = serializers.BooleanField()
     is_running = serializers.BooleanField()
 
-
 class CommandSerializer(serializers.Serializer):
     """This is the serializer for the commands that we receive through the Rest API.
     The command is a JSON object that we then will pass on to the associated container
@@ -40,5 +39,9 @@ class CommandSerializer(serializers.Serializer):
     target = serializers.CharField(required=False, allow_blank=True)
     description = serializers.CharField()
     results = serializers.CharField(required=False, allow_blank=False)
+    image = serializers.CharField(required=False, allow_blank=False)
 
-
+class CodeSerializer(serializers.Serializer):
+    """This is the serializer for command lists grouped by code"""
+    code = serializers.CharField()
+    commands = CommandSerializer(many=True)

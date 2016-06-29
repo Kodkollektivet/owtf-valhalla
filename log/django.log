@@ -1,0 +1,576 @@
+2016-06-29 09:42:23,652 [DEBUG] django.db.backends.schema: CREATE TABLE "django_migrations" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" datetime NOT NULL); (params None)
+2016-06-29 09:42:23,652 [DEBUG] django.db.backends.schema: CREATE TABLE "django_migrations" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" datetime NOT NULL); (params None)
+2016-06-29 09:42:23,658 [DEBUG] django.db.backends.schema: CREATE TABLE "corsheaders_corsmodel" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "cors" varchar(255) NOT NULL); (params None)
+2016-06-29 09:42:23,658 [DEBUG] django.db.backends.schema: CREATE TABLE "corsheaders_corsmodel" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "cors" varchar(255) NOT NULL); (params None)
+2016-06-29 09:42:23,666 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 09:42:23,666 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 09:42:23,672 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 09:42:23,672 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 09:42:23,673 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 09:42:23,673 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 09:42:23,674 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id", "name") SELECT "model", "app_label", "id", "name" FROM "django_content_type__old"; (params [])
+2016-06-29 09:42:23,674 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id", "name") SELECT "model", "app_label", "id", "name" FROM "django_content_type__old"; (params [])
+2016-06-29 09:42:23,675 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 09:42:23,675 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 09:42:23,675 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 09:42:23,675 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 09:42:23,682 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(50) NOT NULL, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id"), "codename" varchar(100) NOT NULL); (params None)
+2016-06-29 09:42:23,682 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(50) NOT NULL, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id"), "codename" varchar(100) NOT NULL); (params None)
+2016-06-29 09:42:23,688 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(80) NOT NULL UNIQUE); (params None)
+2016-06-29 09:42:23,688 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(80) NOT NULL UNIQUE); (params None)
+2016-06-29 09:42:23,689 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "group_id" integer NOT NULL REFERENCES "auth_group" ("id"), "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id")); (params None)
+2016-06-29 09:42:23,689 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "group_id" integer NOT NULL REFERENCES "auth_group" ("id"), "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id")); (params None)
+2016-06-29 09:42:23,698 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(75) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL); (params None)
+2016-06-29 09:42:23,698 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(75) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL); (params None)
+2016-06-29 09:42:23,699 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user_groups" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "group_id" integer NOT NULL REFERENCES "auth_group" ("id")); (params None)
+2016-06-29 09:42:23,699 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user_groups" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "group_id" integer NOT NULL REFERENCES "auth_group" ("id")); (params None)
+2016-06-29 09:42:23,701 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user_user_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id")); (params None)
+2016-06-29 09:42:23,701 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user_user_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id")); (params None)
+2016-06-29 09:42:23,701 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_permission_content_type_id_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); (params [])
+2016-06-29 09:42:23,701 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_permission_content_type_id_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); (params [])
+2016-06-29 09:42:23,702 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_permission_417f1b1c" ON "auth_permission" ("content_type_id"); (params [])
+2016-06-29 09:42:23,702 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_permission_417f1b1c" ON "auth_permission" ("content_type_id"); (params [])
+2016-06-29 09:42:23,702 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_group_permissions_group_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id"); (params [])
+2016-06-29 09:42:23,702 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_group_permissions_group_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id"); (params [])
+2016-06-29 09:42:23,702 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_0e939a4f" ON "auth_group_permissions" ("group_id"); (params [])
+2016-06-29 09:42:23,702 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_0e939a4f" ON "auth_group_permissions" ("group_id"); (params [])
+2016-06-29 09:42:23,703 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_8373b171" ON "auth_group_permissions" ("permission_id"); (params [])
+2016-06-29 09:42:23,703 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_8373b171" ON "auth_group_permissions" ("permission_id"); (params [])
+2016-06-29 09:42:23,703 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_user_groups_user_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id"); (params [])
+2016-06-29 09:42:23,703 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_user_groups_user_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id"); (params [])
+2016-06-29 09:42:23,704 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_groups_e8701ad4" ON "auth_user_groups" ("user_id"); (params [])
+2016-06-29 09:42:23,704 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_groups_e8701ad4" ON "auth_user_groups" ("user_id"); (params [])
+2016-06-29 09:42:23,704 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_groups_0e939a4f" ON "auth_user_groups" ("group_id"); (params [])
+2016-06-29 09:42:23,704 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_groups_0e939a4f" ON "auth_user_groups" ("group_id"); (params [])
+2016-06-29 09:42:23,704 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id"); (params [])
+2016-06-29 09:42:23,704 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id"); (params [])
+2016-06-29 09:42:23,705 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_user_permissions_e8701ad4" ON "auth_user_user_permissions" ("user_id"); (params [])
+2016-06-29 09:42:23,705 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_user_permissions_e8701ad4" ON "auth_user_user_permissions" ("user_id"); (params [])
+2016-06-29 09:42:23,705 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_user_permissions_8373b171" ON "auth_user_user_permissions" ("permission_id"); (params [])
+2016-06-29 09:42:23,705 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_user_permissions_8373b171" ON "auth_user_user_permissions" ("permission_id"); (params [])
+2016-06-29 09:42:23,719 [DEBUG] django.db.backends.schema: CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "action_time" datetime NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id"), "user_id" integer NOT NULL REFERENCES "auth_user" ("id")); (params None)
+2016-06-29 09:42:23,719 [DEBUG] django.db.backends.schema: CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "action_time" datetime NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id"), "user_id" integer NOT NULL REFERENCES "auth_user" ("id")); (params None)
+2016-06-29 09:42:23,720 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_417f1b1c" ON "django_admin_log" ("content_type_id"); (params [])
+2016-06-29 09:42:23,720 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_417f1b1c" ON "django_admin_log" ("content_type_id"); (params [])
+2016-06-29 09:42:23,720 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_e8701ad4" ON "django_admin_log" ("user_id"); (params [])
+2016-06-29 09:42:23,720 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_e8701ad4" ON "django_admin_log" ("user_id"); (params [])
+2016-06-29 09:42:23,732 [DEBUG] django.db.backends.schema: ALTER TABLE "django_admin_log" RENAME TO "django_admin_log__old"; (params [])
+2016-06-29 09:42:23,732 [DEBUG] django.db.backends.schema: ALTER TABLE "django_admin_log" RENAME TO "django_admin_log__old"; (params [])
+2016-06-29 09:42:23,733 [DEBUG] django.db.backends.schema: CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id"), "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "action_time" datetime NOT NULL); (params None)
+2016-06-29 09:42:23,733 [DEBUG] django.db.backends.schema: CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id"), "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "action_time" datetime NOT NULL); (params None)
+2016-06-29 09:42:23,734 [DEBUG] django.db.backends.schema: INSERT INTO "django_admin_log" ("action_flag", "action_time", "user_id", "content_type_id", "object_repr", "object_id", "change_message", "id") SELECT "action_flag", "action_time", "user_id", "content_type_id", "object_repr", "object_id", "change_message", "id" FROM "django_admin_log__old"; (params [])
+2016-06-29 09:42:23,734 [DEBUG] django.db.backends.schema: INSERT INTO "django_admin_log" ("action_flag", "action_time", "user_id", "content_type_id", "object_repr", "object_id", "change_message", "id") SELECT "action_flag", "action_time", "user_id", "content_type_id", "object_repr", "object_id", "change_message", "id" FROM "django_admin_log__old"; (params [])
+2016-06-29 09:42:23,734 [DEBUG] django.db.backends.schema: DROP TABLE "django_admin_log__old"; (params [])
+2016-06-29 09:42:23,734 [DEBUG] django.db.backends.schema: DROP TABLE "django_admin_log__old"; (params [])
+2016-06-29 09:42:23,735 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_417f1b1c" ON "django_admin_log" ("content_type_id"); (params [])
+2016-06-29 09:42:23,735 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_417f1b1c" ON "django_admin_log" ("content_type_id"); (params [])
+2016-06-29 09:42:23,735 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_e8701ad4" ON "django_admin_log" ("user_id"); (params [])
+2016-06-29 09:42:23,735 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_e8701ad4" ON "django_admin_log" ("user_id"); (params [])
+2016-06-29 09:42:23,775 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 09:42:23,775 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 09:42:23,776 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL, "name" varchar(100) NULL); (params None)
+2016-06-29 09:42:23,776 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL, "name" varchar(100) NULL); (params None)
+2016-06-29 09:42:23,777 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id", "name") SELECT "model", "app_label", "id", "name" FROM "django_content_type__old"; (params [])
+2016-06-29 09:42:23,777 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id", "name") SELECT "model", "app_label", "id", "name" FROM "django_content_type__old"; (params [])
+2016-06-29 09:42:23,777 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 09:42:23,777 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 09:42:23,777 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 09:42:23,777 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 09:42:23,788 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 09:42:23,788 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 09:42:23,789 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 09:42:23,789 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 09:42:23,789 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id") SELECT "model", "app_label", "id" FROM "django_content_type__old"; (params [])
+2016-06-29 09:42:23,789 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id") SELECT "model", "app_label", "id" FROM "django_content_type__old"; (params [])
+2016-06-29 09:42:23,790 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 09:42:23,790 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 09:42:23,790 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 09:42:23,790 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 09:42:23,801 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_permission" RENAME TO "auth_permission__old"; (params [])
+2016-06-29 09:42:23,801 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_permission" RENAME TO "auth_permission__old"; (params [])
+2016-06-29 09:42:23,802 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id"), "codename" varchar(100) NOT NULL, "name" varchar(255) NOT NULL); (params None)
+2016-06-29 09:42:23,802 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id"), "codename" varchar(100) NOT NULL, "name" varchar(255) NOT NULL); (params None)
+2016-06-29 09:42:23,802 [DEBUG] django.db.backends.schema: INSERT INTO "auth_permission" ("content_type_id", "codename", "id", "name") SELECT "content_type_id", "codename", "id", "name" FROM "auth_permission__old"; (params [])
+2016-06-29 09:42:23,802 [DEBUG] django.db.backends.schema: INSERT INTO "auth_permission" ("content_type_id", "codename", "id", "name") SELECT "content_type_id", "codename", "id", "name" FROM "auth_permission__old"; (params [])
+2016-06-29 09:42:23,802 [DEBUG] django.db.backends.schema: DROP TABLE "auth_permission__old"; (params [])
+2016-06-29 09:42:23,802 [DEBUG] django.db.backends.schema: DROP TABLE "auth_permission__old"; (params [])
+2016-06-29 09:42:23,803 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_permission_content_type_id_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); (params [])
+2016-06-29 09:42:23,803 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_permission_content_type_id_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); (params [])
+2016-06-29 09:42:23,803 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_permission_417f1b1c" ON "auth_permission" ("content_type_id"); (params [])
+2016-06-29 09:42:23,803 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_permission_417f1b1c" ON "auth_permission" ("content_type_id"); (params [])
+2016-06-29 09:42:23,814 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 09:42:23,814 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 09:42:23,815 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "email" varchar(254) NOT NULL); (params None)
+2016-06-29 09:42:23,815 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "email" varchar(254) NOT NULL); (params None)
+2016-06-29 09:42:23,815 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 09:42:23,815 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 09:42:23,815 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 09:42:23,815 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 09:42:23,826 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 09:42:23,826 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 09:42:23,827 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "username" varchar(30) NOT NULL UNIQUE); (params None)
+2016-06-29 09:42:23,827 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "username" varchar(30) NOT NULL UNIQUE); (params None)
+2016-06-29 09:42:23,828 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 09:42:23,828 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 09:42:23,828 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 09:42:23,828 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 09:42:23,839 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 09:42:23,839 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 09:42:23,840 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "last_login" datetime NULL); (params None)
+2016-06-29 09:42:23,840 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "last_login" datetime NULL); (params None)
+2016-06-29 09:42:23,840 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 09:42:23,840 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 09:42:23,840 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 09:42:23,840 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 09:42:23,851 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 09:42:23,851 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 09:42:23,852 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "username" varchar(30) NOT NULL UNIQUE); (params None)
+2016-06-29 09:42:23,852 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "username" varchar(30) NOT NULL UNIQUE); (params None)
+2016-06-29 09:42:23,852 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 09:42:23,852 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 09:42:23,853 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 09:42:23,853 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 09:42:23,856 [DEBUG] django.db.backends.schema: CREATE TABLE "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" datetime NOT NULL); (params None)
+2016-06-29 09:42:23,856 [DEBUG] django.db.backends.schema: CREATE TABLE "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" datetime NOT NULL); (params None)
+2016-06-29 09:42:23,857 [DEBUG] django.db.backends.schema: CREATE INDEX "django_session_de54fa62" ON "django_session" ("expire_date"); (params [])
+2016-06-29 09:42:23,857 [DEBUG] django.db.backends.schema: CREATE INDEX "django_session_de54fa62" ON "django_session" ("expire_date"); (params [])
+2016-06-29 10:08:53,448 [DEBUG] django.db.backends.schema: CREATE TABLE "django_migrations" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" datetime NOT NULL); (params None)
+2016-06-29 10:08:53,448 [DEBUG] django.db.backends.schema: CREATE TABLE "django_migrations" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app" varchar(255) NOT NULL, "name" varchar(255) NOT NULL, "applied" datetime NOT NULL); (params None)
+2016-06-29 10:08:53,451 [DEBUG] django.db.backends.schema: CREATE TABLE "corsheaders_corsmodel" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "cors" varchar(255) NOT NULL); (params None)
+2016-06-29 10:08:53,451 [DEBUG] django.db.backends.schema: CREATE TABLE "corsheaders_corsmodel" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "cors" varchar(255) NOT NULL); (params None)
+2016-06-29 10:08:53,454 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 10:08:53,454 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 10:08:53,457 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 10:08:53,457 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 10:08:53,458 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 10:08:53,458 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(100) NOT NULL, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 10:08:53,458 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id", "name") SELECT "model", "app_label", "id", "name" FROM "django_content_type__old"; (params [])
+2016-06-29 10:08:53,458 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id", "name") SELECT "model", "app_label", "id", "name" FROM "django_content_type__old"; (params [])
+2016-06-29 10:08:53,458 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 10:08:53,458 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 10:08:53,458 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 10:08:53,458 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 10:08:53,463 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(50) NOT NULL, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id"), "codename" varchar(100) NOT NULL); (params None)
+2016-06-29 10:08:53,463 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(50) NOT NULL, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id"), "codename" varchar(100) NOT NULL); (params None)
+2016-06-29 10:08:53,467 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(80) NOT NULL UNIQUE); (params None)
+2016-06-29 10:08:53,467 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "name" varchar(80) NOT NULL UNIQUE); (params None)
+2016-06-29 10:08:53,468 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "group_id" integer NOT NULL REFERENCES "auth_group" ("id"), "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id")); (params None)
+2016-06-29 10:08:53,468 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_group_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "group_id" integer NOT NULL REFERENCES "auth_group" ("id"), "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id")); (params None)
+2016-06-29 10:08:53,476 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(75) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL); (params None)
+2016-06-29 10:08:53,476 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(75) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL); (params None)
+2016-06-29 10:08:53,477 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user_groups" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "group_id" integer NOT NULL REFERENCES "auth_group" ("id")); (params None)
+2016-06-29 10:08:53,477 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user_groups" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "group_id" integer NOT NULL REFERENCES "auth_group" ("id")); (params None)
+2016-06-29 10:08:53,478 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user_user_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id")); (params None)
+2016-06-29 10:08:53,478 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user_user_permissions" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "permission_id" integer NOT NULL REFERENCES "auth_permission" ("id")); (params None)
+2016-06-29 10:08:53,479 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_permission_content_type_id_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); (params [])
+2016-06-29 10:08:53,479 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_permission_content_type_id_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); (params [])
+2016-06-29 10:08:53,479 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_permission_417f1b1c" ON "auth_permission" ("content_type_id"); (params [])
+2016-06-29 10:08:53,479 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_permission_417f1b1c" ON "auth_permission" ("content_type_id"); (params [])
+2016-06-29 10:08:53,479 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_group_permissions_group_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id"); (params [])
+2016-06-29 10:08:53,479 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_group_permissions_group_id_0cd325b0_uniq" ON "auth_group_permissions" ("group_id", "permission_id"); (params [])
+2016-06-29 10:08:53,480 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_0e939a4f" ON "auth_group_permissions" ("group_id"); (params [])
+2016-06-29 10:08:53,480 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_0e939a4f" ON "auth_group_permissions" ("group_id"); (params [])
+2016-06-29 10:08:53,480 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_8373b171" ON "auth_group_permissions" ("permission_id"); (params [])
+2016-06-29 10:08:53,480 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_group_permissions_8373b171" ON "auth_group_permissions" ("permission_id"); (params [])
+2016-06-29 10:08:53,480 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_user_groups_user_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id"); (params [])
+2016-06-29 10:08:53,480 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_user_groups_user_id_94350c0c_uniq" ON "auth_user_groups" ("user_id", "group_id"); (params [])
+2016-06-29 10:08:53,480 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_groups_e8701ad4" ON "auth_user_groups" ("user_id"); (params [])
+2016-06-29 10:08:53,480 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_groups_e8701ad4" ON "auth_user_groups" ("user_id"); (params [])
+2016-06-29 10:08:53,481 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_groups_0e939a4f" ON "auth_user_groups" ("group_id"); (params [])
+2016-06-29 10:08:53,481 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_groups_0e939a4f" ON "auth_user_groups" ("group_id"); (params [])
+2016-06-29 10:08:53,481 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id"); (params [])
+2016-06-29 10:08:53,481 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_user_user_permissions_user_id_14a6b632_uniq" ON "auth_user_user_permissions" ("user_id", "permission_id"); (params [])
+2016-06-29 10:08:53,481 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_user_permissions_e8701ad4" ON "auth_user_user_permissions" ("user_id"); (params [])
+2016-06-29 10:08:53,481 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_user_permissions_e8701ad4" ON "auth_user_user_permissions" ("user_id"); (params [])
+2016-06-29 10:08:53,482 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_user_permissions_8373b171" ON "auth_user_user_permissions" ("permission_id"); (params [])
+2016-06-29 10:08:53,482 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_user_user_permissions_8373b171" ON "auth_user_user_permissions" ("permission_id"); (params [])
+2016-06-29 10:08:53,492 [DEBUG] django.db.backends.schema: CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "action_time" datetime NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id"), "user_id" integer NOT NULL REFERENCES "auth_user" ("id")); (params None)
+2016-06-29 10:08:53,492 [DEBUG] django.db.backends.schema: CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "action_time" datetime NOT NULL, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id"), "user_id" integer NOT NULL REFERENCES "auth_user" ("id")); (params None)
+2016-06-29 10:08:53,493 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_417f1b1c" ON "django_admin_log" ("content_type_id"); (params [])
+2016-06-29 10:08:53,493 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_417f1b1c" ON "django_admin_log" ("content_type_id"); (params [])
+2016-06-29 10:08:53,493 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_e8701ad4" ON "django_admin_log" ("user_id"); (params [])
+2016-06-29 10:08:53,493 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_e8701ad4" ON "django_admin_log" ("user_id"); (params [])
+2016-06-29 10:08:53,504 [DEBUG] django.db.backends.schema: ALTER TABLE "django_admin_log" RENAME TO "django_admin_log__old"; (params [])
+2016-06-29 10:08:53,504 [DEBUG] django.db.backends.schema: ALTER TABLE "django_admin_log" RENAME TO "django_admin_log__old"; (params [])
+2016-06-29 10:08:53,505 [DEBUG] django.db.backends.schema: CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id"), "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "action_time" datetime NOT NULL); (params None)
+2016-06-29 10:08:53,505 [DEBUG] django.db.backends.schema: CREATE TABLE "django_admin_log" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "object_id" text NULL, "object_repr" varchar(200) NOT NULL, "action_flag" smallint unsigned NOT NULL, "change_message" text NOT NULL, "content_type_id" integer NULL REFERENCES "django_content_type" ("id"), "user_id" integer NOT NULL REFERENCES "auth_user" ("id"), "action_time" datetime NOT NULL); (params None)
+2016-06-29 10:08:53,506 [DEBUG] django.db.backends.schema: INSERT INTO "django_admin_log" ("action_flag", "action_time", "user_id", "content_type_id", "object_repr", "object_id", "change_message", "id") SELECT "action_flag", "action_time", "user_id", "content_type_id", "object_repr", "object_id", "change_message", "id" FROM "django_admin_log__old"; (params [])
+2016-06-29 10:08:53,506 [DEBUG] django.db.backends.schema: INSERT INTO "django_admin_log" ("action_flag", "action_time", "user_id", "content_type_id", "object_repr", "object_id", "change_message", "id") SELECT "action_flag", "action_time", "user_id", "content_type_id", "object_repr", "object_id", "change_message", "id" FROM "django_admin_log__old"; (params [])
+2016-06-29 10:08:53,506 [DEBUG] django.db.backends.schema: DROP TABLE "django_admin_log__old"; (params [])
+2016-06-29 10:08:53,506 [DEBUG] django.db.backends.schema: DROP TABLE "django_admin_log__old"; (params [])
+2016-06-29 10:08:53,506 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_417f1b1c" ON "django_admin_log" ("content_type_id"); (params [])
+2016-06-29 10:08:53,506 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_417f1b1c" ON "django_admin_log" ("content_type_id"); (params [])
+2016-06-29 10:08:53,507 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_e8701ad4" ON "django_admin_log" ("user_id"); (params [])
+2016-06-29 10:08:53,507 [DEBUG] django.db.backends.schema: CREATE INDEX "django_admin_log_e8701ad4" ON "django_admin_log" ("user_id"); (params [])
+2016-06-29 10:08:53,545 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 10:08:53,545 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 10:08:53,546 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL, "name" varchar(100) NULL); (params None)
+2016-06-29 10:08:53,546 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL, "name" varchar(100) NULL); (params None)
+2016-06-29 10:08:53,547 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id", "name") SELECT "model", "app_label", "id", "name" FROM "django_content_type__old"; (params [])
+2016-06-29 10:08:53,547 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id", "name") SELECT "model", "app_label", "id", "name" FROM "django_content_type__old"; (params [])
+2016-06-29 10:08:53,547 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 10:08:53,547 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 10:08:53,547 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 10:08:53,547 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 10:08:53,558 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 10:08:53,558 [DEBUG] django.db.backends.schema: ALTER TABLE "django_content_type" RENAME TO "django_content_type__old"; (params [])
+2016-06-29 10:08:53,559 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 10:08:53,559 [DEBUG] django.db.backends.schema: CREATE TABLE "django_content_type" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "app_label" varchar(100) NOT NULL, "model" varchar(100) NOT NULL); (params None)
+2016-06-29 10:08:53,559 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id") SELECT "model", "app_label", "id" FROM "django_content_type__old"; (params [])
+2016-06-29 10:08:53,559 [DEBUG] django.db.backends.schema: INSERT INTO "django_content_type" ("model", "app_label", "id") SELECT "model", "app_label", "id" FROM "django_content_type__old"; (params [])
+2016-06-29 10:08:53,560 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 10:08:53,560 [DEBUG] django.db.backends.schema: DROP TABLE "django_content_type__old"; (params [])
+2016-06-29 10:08:53,560 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 10:08:53,560 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "django_content_type_app_label_76bd3d3b_uniq" ON "django_content_type" ("app_label", "model"); (params [])
+2016-06-29 10:08:53,571 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_permission" RENAME TO "auth_permission__old"; (params [])
+2016-06-29 10:08:53,571 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_permission" RENAME TO "auth_permission__old"; (params [])
+2016-06-29 10:08:53,572 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id"), "codename" varchar(100) NOT NULL, "name" varchar(255) NOT NULL); (params None)
+2016-06-29 10:08:53,572 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_permission" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "content_type_id" integer NOT NULL REFERENCES "django_content_type" ("id"), "codename" varchar(100) NOT NULL, "name" varchar(255) NOT NULL); (params None)
+2016-06-29 10:08:53,572 [DEBUG] django.db.backends.schema: INSERT INTO "auth_permission" ("content_type_id", "codename", "id", "name") SELECT "content_type_id", "codename", "id", "name" FROM "auth_permission__old"; (params [])
+2016-06-29 10:08:53,572 [DEBUG] django.db.backends.schema: INSERT INTO "auth_permission" ("content_type_id", "codename", "id", "name") SELECT "content_type_id", "codename", "id", "name" FROM "auth_permission__old"; (params [])
+2016-06-29 10:08:53,572 [DEBUG] django.db.backends.schema: DROP TABLE "auth_permission__old"; (params [])
+2016-06-29 10:08:53,572 [DEBUG] django.db.backends.schema: DROP TABLE "auth_permission__old"; (params [])
+2016-06-29 10:08:53,573 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_permission_content_type_id_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); (params [])
+2016-06-29 10:08:53,573 [DEBUG] django.db.backends.schema: CREATE UNIQUE INDEX "auth_permission_content_type_id_01ab375a_uniq" ON "auth_permission" ("content_type_id", "codename"); (params [])
+2016-06-29 10:08:53,573 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_permission_417f1b1c" ON "auth_permission" ("content_type_id"); (params [])
+2016-06-29 10:08:53,573 [DEBUG] django.db.backends.schema: CREATE INDEX "auth_permission_417f1b1c" ON "auth_permission" ("content_type_id"); (params [])
+2016-06-29 10:08:53,584 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 10:08:53,584 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 10:08:53,585 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "email" varchar(254) NOT NULL); (params None)
+2016-06-29 10:08:53,585 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "email" varchar(254) NOT NULL); (params None)
+2016-06-29 10:08:53,585 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 10:08:53,585 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 10:08:53,586 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 10:08:53,586 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 10:08:53,597 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 10:08:53,597 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 10:08:53,598 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "username" varchar(30) NOT NULL UNIQUE); (params None)
+2016-06-29 10:08:53,598 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NOT NULL, "is_superuser" bool NOT NULL, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "username" varchar(30) NOT NULL UNIQUE); (params None)
+2016-06-29 10:08:53,598 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 10:08:53,598 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 10:08:53,599 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 10:08:53,599 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 10:08:53,610 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 10:08:53,610 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 10:08:53,611 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "last_login" datetime NULL); (params None)
+2016-06-29 10:08:53,611 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "is_superuser" bool NOT NULL, "username" varchar(30) NOT NULL UNIQUE, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "last_login" datetime NULL); (params None)
+2016-06-29 10:08:53,611 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 10:08:53,611 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 10:08:53,612 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 10:08:53,612 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 10:08:53,623 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 10:08:53,623 [DEBUG] django.db.backends.schema: ALTER TABLE "auth_user" RENAME TO "auth_user__old"; (params [])
+2016-06-29 10:08:53,624 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "username" varchar(30) NOT NULL UNIQUE); (params None)
+2016-06-29 10:08:53,624 [DEBUG] django.db.backends.schema: CREATE TABLE "auth_user" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "password" varchar(128) NOT NULL, "last_login" datetime NULL, "is_superuser" bool NOT NULL, "first_name" varchar(30) NOT NULL, "last_name" varchar(30) NOT NULL, "email" varchar(254) NOT NULL, "is_staff" bool NOT NULL, "is_active" bool NOT NULL, "date_joined" datetime NOT NULL, "username" varchar(30) NOT NULL UNIQUE); (params None)
+2016-06-29 10:08:53,625 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 10:08:53,625 [DEBUG] django.db.backends.schema: INSERT INTO "auth_user" ("username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined") SELECT "username", "first_name", "last_name", "is_active", "email", "is_superuser", "is_staff", "last_login", "password", "id", "date_joined" FROM "auth_user__old"; (params [])
+2016-06-29 10:08:53,625 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 10:08:53,625 [DEBUG] django.db.backends.schema: DROP TABLE "auth_user__old"; (params [])
+2016-06-29 10:08:53,629 [DEBUG] django.db.backends.schema: CREATE TABLE "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" datetime NOT NULL); (params None)
+2016-06-29 10:08:53,629 [DEBUG] django.db.backends.schema: CREATE TABLE "django_session" ("session_key" varchar(40) NOT NULL PRIMARY KEY, "session_data" text NOT NULL, "expire_date" datetime NOT NULL); (params None)
+2016-06-29 10:08:53,629 [DEBUG] django.db.backends.schema: CREATE INDEX "django_session_de54fa62" ON "django_session" ("expire_date"); (params [])
+2016-06-29 10:08:53,629 [DEBUG] django.db.backends.schema: CREATE INDEX "django_session_de54fa62" ON "django_session" ("expire_date"); (params [])
+2016-06-29 10:11:48,345 [DEBUG] django.db.backends: (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:11:48,345 [DEBUG] django.db.backends: (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:11:48,346 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:11:48,346 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:12:00,126 [WARNING] django.request: Not Found: /favicon.ico
+2016-06-29 10:12:00,132 [DEBUG] django.template: Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+VariableDoesNotExist: Failed lookup for key [name] in u'<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>'
+2016-06-29 10:12:00,132 [DEBUG] django.template: Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/template/base.py", line 905, in _resolve_lookup
+    (bit, current))  # missing attribute
+VariableDoesNotExist: Failed lookup for key [name] in u'<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>'
+2016-06-29 10:24:43,680 [DEBUG] django.db.backends: (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:24:43,680 [DEBUG] django.db.backends: (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:24:43,682 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:24:43,682 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:24:51,680 [ERROR] django.request: Internal Server Error: /containers/commands/
+Traceback (most recent call last):
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 149, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 147, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 58, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/views/generic/base.py", line 68, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/views.py", line 466, in dispatch
+    response = self.handle_exception(exc)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/views.py", line 463, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/home/sebastian/code/python/owtf-valhalla/core/web/views.py", line 161, in get
+    return Response(serializer.data, status=status.HTTP_200_OK)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/serializers.py", line 674, in data
+    ret = super(ListSerializer, self).data
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/serializers.py", line 239, in data
+    self._data = self.to_representation(self.instance)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/serializers.py", line 614, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/serializers.py", line 463, in to_representation
+    attribute = field.get_attribute(instance)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/fields.py", line 422, in get_attribute
+    raise type(exc)(msg)
+KeyError: u"Got KeyError when attempting to get a value for field `command` on serializer `CommandSerializer`.\nThe serializer field might be named incorrectly and not match any attribute or key on the `dict` instance.\nOriginal exception text was: u'command'."
+2016-06-29 10:27:39,459 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:27:39,459 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:27:39,461 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:27:39,461 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:27:43,983 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:27:43,983 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:27:43,985 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:27:43,985 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:29:13,001 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:29:13,001 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:29:13,002 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:29:13,002 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:33:34,756 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:33:34,756 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:33:34,757 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:33:34,757 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:33:38,368 [DEBUG] django.db.backends: (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:33:38,368 [DEBUG] django.db.backends: (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:33:38,369 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:33:38,369 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:33:49,233 [ERROR] django.request: Internal Server Error: /containers/
+Traceback (most recent call last):
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 174, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 172, in get_response
+    response = response.render()
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/template/response.py", line 160, in render
+    self.content = self.rendered_content
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/response.py", line 71, in rendered_content
+    ret = renderer.render(self.data, media_type, context)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/renderers.py", line 104, in render
+    separators=separators
+  File "/usr/lib/python2.7/json/__init__.py", line 251, in dumps
+    sort_keys=sort_keys, **kw).encode(obj)
+  File "/usr/lib/python2.7/json/encoder.py", line 207, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/usr/lib/python2.7/json/encoder.py", line 270, in iterencode
+    return _iterencode(o, 0)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/utils/encoders.py", line 64, in default
+    return super(JSONEncoder, self).default(obj)
+  File "/usr/lib/python2.7/json/encoder.py", line 184, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: {   'config': {   u'commands': [   {   u'code': u'666',
+                                       u'command': u'sleep 5s',
+                                       u'description': u'Test',
+                                       'image': u'owtfvalhallatestcontainer:0.1',
+                                       u'noise': u'passive',
+                                       u'target': u''},
+                                   {   u'code': u'231',
+                                       u'command': u'sleep 10s',
+                                       u'description': u'another test',
+                                       'image': u'owtfvalhallatestcontainer:0.1',
+                                       u'noise': u'active',
+                                       u'target': u''}],
+                  u'description': u'This container is only used for testing purposes, save it!',
+                  u'title': u'OwtfValhallaTestContainer',
+                  u'version': u'0.1'},
+    'container_id': None,
+    'container_name': None,
+    'container_tag': None,
+    'image': u'owtfvalhallatestcontainer:0.1',
+    'image_id': None,
+    'image_name': u'OwtfValhallaTestContainer',
+    'image_path': '/home/sebastian/code/python/owtf-valhalla/containers/testcontainer',
+    'image_version': u'0.1',
+    'ip_address': None,
+    'is_container_built': False,
+    'is_image_built': False,
+    'is_running': False,
+    'is_valid': True,
+    'log': '',
+    'port': None,
+    'results': []} is not JSON serializable
+2016-06-29 10:34:20,039 [ERROR] django.request: Internal Server Error: /containers/
+Traceback (most recent call last):
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 174, in get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/core/handlers/base.py", line 172, in get_response
+    response = response.render()
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/django/template/response.py", line 160, in render
+    self.content = self.rendered_content
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/response.py", line 71, in rendered_content
+    ret = renderer.render(self.data, media_type, context)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/renderers.py", line 676, in render
+    context = self.get_context(data, accepted_media_type, renderer_context)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/renderers.py", line 637, in get_context
+    'content': self.get_content(renderer, data, accepted_media_type, renderer_context),
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/renderers.py", line 399, in get_content
+    content = renderer.render(data, accepted_media_type, renderer_context)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/renderers.py", line 104, in render
+    separators=separators
+  File "/usr/lib/python2.7/json/__init__.py", line 251, in dumps
+    sort_keys=sort_keys, **kw).encode(obj)
+  File "/usr/lib/python2.7/json/encoder.py", line 209, in encode
+    chunks = list(chunks)
+  File "/usr/lib/python2.7/json/encoder.py", line 431, in _iterencode
+    for chunk in _iterencode_list(o, _current_indent_level):
+  File "/usr/lib/python2.7/json/encoder.py", line 332, in _iterencode_list
+    for chunk in chunks:
+  File "/usr/lib/python2.7/json/encoder.py", line 442, in _iterencode
+    o = _default(o)
+  File "/home/sebastian/code/python/owtf-valhalla/venv/local/lib/python2.7/site-packages/rest_framework/utils/encoders.py", line 64, in default
+    return super(JSONEncoder, self).default(obj)
+  File "/usr/lib/python2.7/json/encoder.py", line 184, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: {   'config': {   u'commands': [   {   u'code': u'666',
+                                       u'command': u'sleep 5s',
+                                       u'description': u'Test',
+                                       'image': u'owtfvalhallatestcontainer:0.1',
+                                       u'noise': u'passive',
+                                       u'target': u''},
+                                   {   u'code': u'231',
+                                       u'command': u'sleep 10s',
+                                       u'description': u'another test',
+                                       'image': u'owtfvalhallatestcontainer:0.1',
+                                       u'noise': u'active',
+                                       u'target': u''}],
+                  u'description': u'This container is only used for testing purposes, save it!',
+                  u'title': u'OwtfValhallaTestContainer',
+                  u'version': u'0.1'},
+    'container_id': None,
+    'container_name': None,
+    'container_tag': None,
+    'image': u'owtfvalhallatestcontainer:0.1',
+    'image_id': None,
+    'image_name': u'OwtfValhallaTestContainer',
+    'image_path': '/home/sebastian/code/python/owtf-valhalla/containers/testcontainer',
+    'image_version': u'0.1',
+    'ip_address': None,
+    'is_container_built': False,
+    'is_image_built': False,
+    'is_running': False,
+    'is_valid': True,
+    'log': '',
+    'port': None,
+    'results': []} is not JSON serializable
+2016-06-29 10:34:53,020 [DEBUG] django.db.backends: (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:34:53,020 [DEBUG] django.db.backends: (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:34:53,021 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:34:53,021 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:39:39,226 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:39:39,226 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:39:39,228 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:39:39,228 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:43:56,231 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:43:56,231 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:43:56,233 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:43:56,233 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:43:59,862 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:43:59,862 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:43:59,864 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:43:59,864 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:44:57,018 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:44:57,018 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:44:57,020 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:44:57,020 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:45:15,167 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:45:15,167 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:45:15,169 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:45:15,169 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:45:18,797 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:45:18,797 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:45:18,798 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:45:18,798 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:45:21,394 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:45:21,394 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 10:45:21,396 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 10:45:21,396 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()

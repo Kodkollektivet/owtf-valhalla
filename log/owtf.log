@@ -1,0 +1,92 @@
+2016-06-29 13:51:39,062 [DEBUG] docker.auth.auth: File doesn't exist
+2016-06-29 13:51:39,070 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=1&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:39,077 [DEBUG] dockerutils.owtfcontainer: Validating: /home/sebastian/code/python/owtf-valhalla/containers/testcontainer
+2016-06-29 13:51:39,077 [DEBUG] dockerutils.owtfcontainer: Container files and folder are in place.
+2016-06-29 13:51:39,077 [DEBUG] dockerutils.owtfcontainer: Inspecting config.json file.
+2016-06-29 13:51:39,077 [DEBUG] dockerutils.owtfcontainer: Inspection OK.
+2016-06-29 13:51:39,081 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/images/json?only_ids=0&all=0 HTTP/1.1" 200 216
+2016-06-29 13:51:39,083 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=1&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:39,084 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=0&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:39,085 [DEBUG] dockerutils.owtfcontainer: Validation and inspection ends. Container looks OK!
+2016-06-29 13:51:39,085 [DEBUG] dockerutils.owtfcontainer: Validating: /home/sebastian/code/python/owtf-valhalla/containers/nmap
+2016-06-29 13:51:39,085 [DEBUG] dockerutils.owtfcontainer: Container files and folder are in place.
+2016-06-29 13:51:39,085 [DEBUG] dockerutils.owtfcontainer: Inspecting config.json file.
+2016-06-29 13:51:39,086 [DEBUG] dockerutils.owtfcontainer: Inspection OK.
+2016-06-29 13:51:39,087 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/images/json?only_ids=0&all=0 HTTP/1.1" 200 216
+2016-06-29 13:51:39,089 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=1&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:39,091 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=0&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:39,091 [DEBUG] dockerutils.owtfcontainer: Validation and inspection ends. Container looks OK!
+2016-06-29 13:51:39,537 [DEBUG] docker.auth.auth: File doesn't exist
+2016-06-29 13:51:39,546 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=1&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:39,552 [DEBUG] dockerutils.owtfcontainer: Validating: /home/sebastian/code/python/owtf-valhalla/containers/testcontainer
+2016-06-29 13:51:39,552 [DEBUG] dockerutils.owtfcontainer: Container files and folder are in place.
+2016-06-29 13:51:39,552 [DEBUG] dockerutils.owtfcontainer: Inspecting config.json file.
+2016-06-29 13:51:39,552 [DEBUG] dockerutils.owtfcontainer: Inspection OK.
+2016-06-29 13:51:39,554 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/images/json?only_ids=0&all=0 HTTP/1.1" 200 216
+2016-06-29 13:51:39,555 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=1&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:39,557 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=0&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:39,558 [DEBUG] dockerutils.owtfcontainer: Validation and inspection ends. Container looks OK!
+2016-06-29 13:51:39,558 [DEBUG] dockerutils.owtfcontainer: Validating: /home/sebastian/code/python/owtf-valhalla/containers/nmap
+2016-06-29 13:51:39,558 [DEBUG] dockerutils.owtfcontainer: Container files and folder are in place.
+2016-06-29 13:51:39,558 [DEBUG] dockerutils.owtfcontainer: Inspecting config.json file.
+2016-06-29 13:51:39,558 [DEBUG] dockerutils.owtfcontainer: Inspection OK.
+2016-06-29 13:51:39,560 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/images/json?only_ids=0&all=0 HTTP/1.1" 200 216
+2016-06-29 13:51:39,561 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=1&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:39,562 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=0&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:39,563 [DEBUG] dockerutils.owtfcontainer: Validation and inspection ends. Container looks OK!
+2016-06-29 13:51:39,577 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 13:51:39,578 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 13:51:39,579 [DEBUG] django.db.backends: (0.000) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 13:51:39,580 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 13:51:39,607 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'logentry' AND "django_content_type"."app_label" = 'admin'); args=('logentry', 'admin')
+2016-06-29 13:51:39,608 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (1) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(1,)
+2016-06-29 13:51:39,609 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'admin'; args=('admin',)
+2016-06-29 13:51:39,610 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'permission' AND "django_content_type"."app_label" = 'auth'); args=('permission', 'auth')
+2016-06-29 13:51:39,611 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'group' AND "django_content_type"."app_label" = 'auth'); args=('group', 'auth')
+2016-06-29 13:51:39,612 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'user' AND "django_content_type"."app_label" = 'auth'); args=('user', 'auth')
+2016-06-29 13:51:39,613 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (2, 3, 4) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(2, 3, 4)
+2016-06-29 13:51:39,614 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'auth'; args=('auth',)
+2016-06-29 13:51:39,615 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'contenttype' AND "django_content_type"."app_label" = 'contenttypes'); args=('contenttype', 'contenttypes')
+2016-06-29 13:51:39,616 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (5) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(5,)
+2016-06-29 13:51:39,617 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'contenttypes'; args=('contenttypes',)
+2016-06-29 13:51:39,618 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'session' AND "django_content_type"."app_label" = 'sessions'); args=('session', 'sessions')
+2016-06-29 13:51:39,619 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (6) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(6,)
+2016-06-29 13:51:39,620 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'sessions'; args=('sessions',)
+2016-06-29 13:51:39,621 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE ("django_content_type"."model" = 'corsmodel' AND "django_content_type"."app_label" = 'corsheaders'); args=('corsmodel', 'corsheaders')
+2016-06-29 13:51:39,623 [DEBUG] django.db.backends: (0.000) SELECT "auth_permission"."content_type_id", "auth_permission"."codename" FROM "auth_permission" INNER JOIN "django_content_type" ON ("auth_permission"."content_type_id" = "django_content_type"."id") WHERE "auth_permission"."content_type_id" IN (7) ORDER BY "django_content_type"."app_label" ASC, "django_content_type"."model" ASC, "auth_permission"."codename" ASC; args=(7,)
+2016-06-29 13:51:39,623 [DEBUG] django.db.backends: (0.000) SELECT "django_content_type"."id", "django_content_type"."app_label", "django_content_type"."model" FROM "django_content_type" WHERE "django_content_type"."app_label" = 'corsheaders'; args=('corsheaders',)
+2016-06-29 13:51:40,350 [DEBUG] docker.auth.auth: File doesn't exist
+2016-06-29 13:51:40,359 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=1&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:40,365 [DEBUG] dockerutils.owtfcontainer: Validating: /home/sebastian/code/python/owtf-valhalla/containers/testcontainer
+2016-06-29 13:51:40,366 [DEBUG] dockerutils.owtfcontainer: Container files and folder are in place.
+2016-06-29 13:51:40,366 [DEBUG] dockerutils.owtfcontainer: Inspecting config.json file.
+2016-06-29 13:51:40,366 [DEBUG] dockerutils.owtfcontainer: Inspection OK.
+2016-06-29 13:51:40,368 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/images/json?only_ids=0&all=0 HTTP/1.1" 200 216
+2016-06-29 13:51:40,370 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=1&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:40,372 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=0&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:40,373 [DEBUG] dockerutils.owtfcontainer: Validation and inspection ends. Container looks OK!
+2016-06-29 13:51:40,374 [DEBUG] dockerutils.owtfcontainer: Validating: /home/sebastian/code/python/owtf-valhalla/containers/nmap
+2016-06-29 13:51:40,374 [DEBUG] dockerutils.owtfcontainer: Container files and folder are in place.
+2016-06-29 13:51:40,374 [DEBUG] dockerutils.owtfcontainer: Inspecting config.json file.
+2016-06-29 13:51:40,374 [DEBUG] dockerutils.owtfcontainer: Inspection OK.
+2016-06-29 13:51:40,376 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/images/json?only_ids=0&all=0 HTTP/1.1" 200 216
+2016-06-29 13:51:40,378 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=1&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:40,380 [DEBUG] requests.packages.urllib3.connectionpool: "GET /v1.22/containers/json?all=0&limit=-1&trunc_cmd=0&size=0 HTTP/1.1" 200 3
+2016-06-29 13:51:40,381 [DEBUG] dockerutils.owtfcontainer: Validation and inspection ends. Container looks OK!
+2016-06-29 13:51:40,398 [DEBUG] django.db.backends: (0.001) 
+            SELECT name, type FROM sqlite_master
+            WHERE type in ('table', 'view') AND NOT name='sqlite_sequence'
+            ORDER BY name; args=None
+2016-06-29 13:51:40,400 [DEBUG] django.db.backends: (0.000) SELECT "django_migrations"."app", "django_migrations"."name" FROM "django_migrations"; args=()
+2016-06-29 13:51:47,509 [DEBUG] MARKDOWN: Successfuly imported extension module "markdown.extensions.headerid".
+2016-06-29 13:51:47,510 [DEBUG] MARKDOWN: Successfully loaded extension "markdown.extensions.headerid.HeaderIdExtension".
+2016-06-29 13:51:49,539 [DEBUG] MARKDOWN: Successfuly imported extension module "markdown.extensions.headerid".
+2016-06-29 13:51:49,540 [DEBUG] MARKDOWN: Successfully loaded extension "markdown.extensions.headerid.HeaderIdExtension".
+2016-06-29 13:51:50,862 [DEBUG] MARKDOWN: Successfuly imported extension module "markdown.extensions.headerid".
+2016-06-29 13:51:50,862 [DEBUG] MARKDOWN: Successfully loaded extension "markdown.extensions.headerid.HeaderIdExtension".

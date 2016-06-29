@@ -11,7 +11,6 @@ that is relevant to a container/image.
 from .owtfcontainer import OwtfContainer
 from .handler import get_owtf_c, commands
 
-
 __author__ = 'owtf-valhalla'
 
 

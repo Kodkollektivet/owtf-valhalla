@@ -6,7 +6,7 @@ from pprint import pprint
 from .owtfcontainer import OwtfContainer
 
 _containers = []
-commands = {}
+commands = []
 
 
 def locate_owtf_containers(location='containers'):
@@ -27,13 +27,17 @@ def aggregate_owtf_codes():
     assembles the commands from each of the
     container.
     """
+    commandDict = {}
     for container in _containers:
         for command in container.config['commands']:
             code = command['code']
             command['image'] = container.image
-            commands.setdefault(code, []).append(command)
+            commandDict.setdefault(code, []).append(command)
+    for key, value in commandDict.iteritems():
+        codeDict = {'code': key, 'commands': value}
+        commands.append(codeDict)
 
-            
+
 locate_owtf_containers()
 aggregate_owtf_codes()
 
@@ -75,4 +79,3 @@ def get_owtf_c(image=None, image_id=None, container_id=None):
 
     else:
         return True, _containers
-

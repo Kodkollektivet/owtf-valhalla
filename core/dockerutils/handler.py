@@ -32,7 +32,7 @@ def aggregate_owtf_codes():
             code = command['code']
             command['image'] = container.image
             commandDict.setdefault(code, []).append(command)
-    for key, value in commandDict.iteritems():
+    for key, value in commandDict.items():
         codeDict = {'code': key, 'commands': value}
         commands.append(codeDict)
 

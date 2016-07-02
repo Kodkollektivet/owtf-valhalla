@@ -137,7 +137,7 @@ class OwtfContainer(object):
 
             log.debug(self.image + ' building image...')
             for build_log in dc.cli.build(path=self.image_path, rm=True, tag=self.image):
-                log.debug(build_log.replace('\n', ''))
+                log.debug(build_log.replace(b'\n', b''))
 
             self.image_id = [i for i in dc.cli.images() if self.image in i['RepoTags']][0].get('Id')
 

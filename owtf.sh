@@ -7,7 +7,7 @@ MANAGE_PY="core/manage.py"
 
 function setup {
   printf "Creating virtual environment...\n\n"
-  virtualenv --python=/usr/bin/python venv
+  virtualenv --python=/usr/bin/python3 venv || virtualenv --python=/usr/local/bin/python3 venv
   source venv/bin/activate
   pip install -q --log-file log/pip-error.log -r requirements.txt
 

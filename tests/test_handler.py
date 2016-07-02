@@ -1,12 +1,12 @@
 import unittest
-from core.dockerutils import handler
-from core.dockerutils.owtfcontainer import OwtfContainer
+from valhalla.dockerutils import handler
+from valhalla.dockerutils.owtfcontainer import OwtfContainer
 
 
 class OwtfContainerTest(unittest.TestCase):
 
     def setUp(self):
-        handler.locate_owtf_containers('../containers')
+        handler.locate_owtf_containers('valhalla/containers')
 
     def tearDown(self):
         pass

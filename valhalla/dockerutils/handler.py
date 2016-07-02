@@ -3,13 +3,13 @@ import fnmatch
 import json
 from pprint import pprint
 
-from .owtfcontainer import OwtfContainer
+from valhalla.dockerutils.owtfcontainer import OwtfContainer
 
 _containers = []
 commands = {}
 
 
-def locate_owtf_containers(location='containers'):
+def locate_owtf_containers(location='valhalla/containers'):
     """Locates the containers that lives inside of the container folder.
     The containers list the filled up with OwtfContainer objects.
 

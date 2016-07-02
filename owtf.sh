@@ -3,13 +3,13 @@
 HELP_MSG="Usage: $0 {setup|start|test}"
 
 VIRTUAL_ENV="venv/bin/activate"
-MANAGE_PY="core/manage.py"
+MANAGE_PY="valhalla/django/manage.py"
 
 function setup {
   printf "Creating virtual environment...\n\n"
-  virtualenv --python=/usr/bin/python venv
+  virtualenv --python=/usr/bin/python2 venv || virtualenv --python=/usr/local/bin/python2 venv
   source venv/bin/activate
-  pip install -q --log-file log/pip-error.log -r requirements.txt
+  pip install -q --log-file logs/pip-error.log -r requirements.txt
 
   printf "\n'Taking care of things for you...' - Microsoft\n"
   python $MANAGE_PY makemigrations
@@ -35,7 +35,7 @@ function test {
   echo "Running nosetests..."
   #nosetests-2.7 -q -w test/
   #python -m unittest discover -v
-  python core/manage.py test
+  python $MANAGE_PY test
 }
 
 if [[ $# > 1 ]]; then

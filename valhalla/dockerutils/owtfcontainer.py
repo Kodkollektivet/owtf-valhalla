@@ -8,8 +8,8 @@ import os
 import pprint
 import json
 import logging
-from .exceptions import DockerContainerException, DockerImageException
-from . import dclient as dc
+from valhalla.dockerutils.exceptions import DockerContainerException, DockerImageException
+from valhalla.dockerutils import dclient as dc
 
 # List with ports that can be assigned to container
 _available_ports = [i for i in range(6000, 6100, 1)]  # 100 containers

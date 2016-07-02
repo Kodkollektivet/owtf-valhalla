@@ -160,7 +160,7 @@ LOGGING = {
         'default': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'log/owtf.log',
+            'filename': 'logs/owtf.log',
             'maxBytes': 1024 * 1024 * 5,  # 5BM
             'backupCount': 5,
             'formatter': 'standard',
@@ -168,7 +168,7 @@ LOGGING = {
         'django': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'log/django.log',
+            'filename': 'logs/django.log',
             'maxBytes': 1024 * 1024 * 5,  # 5MB
             'backupCount': 5,
             'formatter': 'standard'
@@ -176,7 +176,7 @@ LOGGING = {
         'docker': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'log/docker.log',
+            'filename': 'logs/docker.log',
             'maxBytes': 1024 * 1024 * 5,  # 5MB
             'backupCount': 5,
             'formatter': 'verbose'

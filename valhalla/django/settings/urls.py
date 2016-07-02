@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from web import views
+from valhalla.django.web import views
 
 urlpatterns = [
     url(r'^containers/$', views.ListAll.as_view()),

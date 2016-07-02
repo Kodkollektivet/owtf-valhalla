@@ -10,10 +10,10 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-from web import serializers
-from middleman import handler as middleman
+from valhalla.django.web import serializers
+from valhalla.middleman import handler as middleman
 
-from dockerutils import get_owtf_c, commands
+from valhalla.dockerutils import get_owtf_c, commands
 
 
 class IndexTemplateView(TemplateView):

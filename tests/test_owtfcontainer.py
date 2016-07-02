@@ -1,7 +1,8 @@
 import unittest
-
-from core.dockerutils import OwtfContainer
-from core.dockerutils.dclient import *
+import os
+from valhalla.dockerutils import OwtfContainer
+from valhalla.dockerutils.dclient import *
+from valhalla.django.settings.settings import CONTAINER_DIR
 
 
 class OwtfContainerTest(unittest.TestCase):
@@ -21,7 +22,7 @@ class OwtfContainerTest(unittest.TestCase):
 
     def setUp(self):
         """Remove all containers and images before """
-        self.container_location = 'containers/testcontainer'
+        self.container_location = os.path.join(CONTAINER_DIR, 'testcontainer')
 
     def test_01_stop_remove_image_and_container(self):
         oc = OwtfContainer(self.container_location)

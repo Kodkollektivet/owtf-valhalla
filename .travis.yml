@@ -4,6 +4,8 @@ language: python
 
 python:
   - "2.7"
+  - "3.4"
+  - "3.5"
 
 services:
   - docker
@@ -14,7 +16,7 @@ before_install:
 
 install: pip install -r requirements.txt
 
-script: python core/manage.py test
+script: ./owtf.sh test
 
 branches:
   only:

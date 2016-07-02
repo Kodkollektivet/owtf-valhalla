@@ -18,7 +18,7 @@ log = logging.getLogger(__name__)
 
 
 class OwtfContainer(object):
-    """OwtfContainer matches images and containers in the core/cotainers dir."""
+    """OwtfContainer matches images and containers in the valhalla/containers dir."""
 
     def __init__(self, owtf_image_path):
 
@@ -109,7 +109,6 @@ class OwtfContainer(object):
                     except Exception as e:
                         log.debug(e)
 
-
                 self.is_container_built = True
                 self.container_id = container['Id']
                 self.container_name = self.inspect().get('Name')
@@ -137,7 +136,7 @@ class OwtfContainer(object):
 
             log.debug(self.image + ' building image...')
             for build_log in dc.cli.build(path=self.image_path, rm=True, tag=self.image):
-                log.debug(build_log.replace('\n', ''))
+                log.debug(build_log.replace(b'\n', b''))
 
             self.image_id = [i for i in dc.cli.images() if self.image in i['RepoTags']][0].get('Id')
 

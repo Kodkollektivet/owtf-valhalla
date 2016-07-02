@@ -4,11 +4,13 @@ import json
 from pprint import pprint
 
 from .owtfcontainer import OwtfContainer
+from valhalla.django.settings.settings import CONTAINER_DIR
 
 _containers = []
 commands = []
 
-def locate_owtf_containers(location='containers'):
+
+def locate_owtf_containers(location=CONTAINER_DIR):
     """Locates the containers that lives inside of the container folder.
     The containers list the filled up with OwtfContainer objects.
 
@@ -32,7 +34,7 @@ def aggregate_owtf_codes():
             code = command['code']
             command['image'] = container.image
             commandDict.setdefault(code, []).append(command)
-    for key, value in commandDict.iteritems():
+    for key, value in commandDict.items():
         codeDict = {'code': key, 'commands': value}
         commands.append(codeDict)
 

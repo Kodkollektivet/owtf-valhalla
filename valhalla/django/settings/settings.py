@@ -13,7 +13,12 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# This is for the django project
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Valhalla project root dir
+ROOT_DIR = os.path.join(os.path.dirname(os.path.realpath(__name__)), 'valhalla')
+# Containers dir
+CONTAINER_DIR = os.path.join(ROOT_DIR, 'containers')
 
 
 # Quick-start development settings - unsuitable for production
@@ -160,7 +165,7 @@ LOGGING = {
         'default': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'log/owtf.log',
+            'filename': 'logs/owtf.log',
             'maxBytes': 1024 * 1024 * 5,  # 5BM
             'backupCount': 5,
             'formatter': 'standard',
@@ -168,7 +173,7 @@ LOGGING = {
         'django': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'log/django.log',
+            'filename': 'logs/django.log',
             'maxBytes': 1024 * 1024 * 5,  # 5MB
             'backupCount': 5,
             'formatter': 'standard'
@@ -176,7 +181,7 @@ LOGGING = {
         'docker': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'log/docker.log',
+            'filename': 'logs/docker.log',
             'maxBytes': 1024 * 1024 * 5,  # 5MB
             'backupCount': 5,
             'formatter': 'verbose'

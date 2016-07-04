@@ -4,11 +4,12 @@ import json
 from pprint import pprint
 
 from .owtfcontainer import OwtfContainer
+from valhalla.django.settings.settings import CONTAINER_DIR
 
 _containers = []
 commands = []
 
-def locate_owtf_containers(location='containers'):
+def locate_owtf_containers(location=CONTAINER_DIR):
     """Locates the containers that lives inside of the container folder.
     The containers list the filled up with OwtfContainer objects.
 

@@ -14,9 +14,9 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" docker-engine=1.10.1-0~trusty
 
-install: pip install -r requirements.txt
+install: ./owtf.sh setup
 
-script: python core/manage.py test
+script: ./owtf.sh test
 
 branches:
   only:

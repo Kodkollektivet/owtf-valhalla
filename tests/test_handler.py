@@ -19,16 +19,20 @@ class OwtfContainerTest(unittest.TestCase):
         self.assertTrue(isinstance(handler.get_owtf_c(image='owtfvalhallatestcontainer:0.1')[1], OwtfContainer))
 
     def test_image_false(self):
-        self.assertFalse(handler.get_owtf_c(image='doesnotexists:0.1')[0])
+        status, container = handler.get_owtf_c(image='doesnotexists:0.1')
+        self.assertFalse(status)
 
     def test_to_many_arguments_false(self):
         # To many arguments, function accepts only one.
         self.assertFalse(handler.get_owtf_c(image='a', image_id=0, container_id=0)[0])
 
     def test_container_id_true(self):
-        c = handler.get_owtf_c(image='owtfvalhallatestcontainer:0.1')[1]
-        c_id = c.container_id
-        self.assertTrue(handler.get_owtf_c(container_id=c_id))
+        """Get a image by image and then check it can be found via container_id"""
+        status, container = handler.get_owtf_c(image='owtfvalhallatestcontainer:0.1')
+        self.assertTrue(status)
+        c_id = container.container_id
+        status, container = handler.get_owtf_c(container_id=c_id)
+        self.assertTrue(status)
 
     def test_container_id_false(self):
         self.assertFalse(handler.get_owtf_c(container_id=0)[0])

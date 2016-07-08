@@ -5,4 +5,7 @@ djangorestframework
 markdown
 django-filter
 django-cors-headers
+nose
+nose-exclude
+django-nose
 coverage

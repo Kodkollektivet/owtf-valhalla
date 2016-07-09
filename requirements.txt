@@ -9,3 +9,5 @@ nose
 nose-exclude
 django-nose
 coverage
+sphinx
+sphinx_rtd_theme

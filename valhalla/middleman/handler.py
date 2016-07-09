@@ -1,5 +1,5 @@
 """
-# >>> from valhalla.dockerutils.owtfcontainer import OwtfContainer
+# >>> from valhalla.dockerutils import OwtfContainer
 # >>> from valhalla.middleman.handler import send_for_execution
 # >>> oc = OwtfContainer('valhalla/containers/testcontainer')
 # >>> oc.build_image()

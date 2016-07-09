@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 
 
 class OwtfContainer(object):
-    """OwtfContainer matches images and containers in the core/cotainers dir.
+    """OwtfContainer matches Docker images in the valhalla/cotainers dir.
 
     >>> from valhalla.dockerutils.owtfcontainer import OwtfContainer
     >>>
@@ -328,7 +328,7 @@ class OwtfContainer(object):
             log.error('Container is not started!')
             log.error(e)
 
-    def get_available_commands(self):
+    def get_available_commands(self) -> list:
         """Returns the part of config.json that contains available commands.
         :return json obj
         """

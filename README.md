@@ -1,6 +1,8 @@
 # OWTF-Valhalla
 
 [![Travis](https://travis-ci.org/Kodkollektivet/owtf-valhalla.svg?branch=master)](https://travis-ci.org/Kodkollektivet/owtf-valhalla)
+[![RTD](https://readthedocs.org/projects/docs/badge/?version=latest)](http://owtf-valhalla.readthedocs.io/en/latest/)
+
 
 ## This application is under heavy development
 

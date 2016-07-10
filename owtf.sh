@@ -35,7 +35,7 @@ function test {
   echo "Running nosetests..."
   #nosetests-2.7 -q -w test/
   #python -m unittest discover -v
-  python $MANAGE_PY test
+  python $MANAGE_PY test -v 3 --with-doctest --exclude-dir=valhalla/containers --with-coverage --cover-package=valhalla --doctest-options=+ELLIPSIS
 }
 
 if [[ $# > 1 ]]; then

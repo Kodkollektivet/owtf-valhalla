@@ -9,6 +9,7 @@ from valhalla.django.settings.settings import CONTAINER_DIR
 _containers = []
 commands = []
 
+
 def locate_owtf_containers(location=CONTAINER_DIR):
     """Locates the containers that lives inside of the container folder.
     The containers list the filled up with OwtfContainer objects.
@@ -54,6 +55,24 @@ def get_owtf_c(image=None, image_id=None, container_id=None):
     Returns a tuple (bool, obj)
     bool = status
     obj = object
+
+    >>> from valhalla.dockerutils import handler
+    >>> from valhalla.dockerutils.owtfcontainer import OwtfContainer
+    >>> status, container = handler.get_owtf_c(image='owtfvalhallatestcontainer:0.1')
+    >>> status
+    True
+    >>> isinstance(container, OwtfContainer)
+    True
+    >>> status, container = handler.get_owtf_c(image='doesnotexists:0.1')
+    >>> status
+    False
+    >>> container  # is None
+    >>> status, containers = handler.get_owtf_c()
+    >>> status
+    True
+    >>> isinstance(containers, list)
+    True
+    >>>
     """
 
     if image and image_id and container_id is not None:

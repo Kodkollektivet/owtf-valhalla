@@ -8,6 +8,9 @@ import os
 import pprint
 import json
 import logging
+
+from docker.errors import NullResource
+
 from .exceptions import DockerContainerException, DockerImageException
 from . import dclient as dc
 
@@ -18,9 +21,65 @@ log = logging.getLogger(__name__)
 
 
 class OwtfContainer(object):
-    """OwtfContainer matches images and containers in the core/cotainers dir."""
+    """OwtfContainer matches Docker images in the valhalla/cotainers dir.
 
-    def __init__(self, owtf_image_path):
+    >>> from valhalla.dockerutils.owtfcontainer import OwtfContainer
+    >>>
+    >>> oc = OwtfContainer('valhalla/containers/testcontainer')
+    >>> oc.is_valid
+    True
+    >>> oc.image
+    'owtfvalhallatestcontainer:0.1'
+    >>> isinstance(oc.config, dict)
+    True
+    >>> isinstance(oc.results, list)
+    True
+    >>> oc.build_image()  # Builds the Docker image
+    >>> oc.build_container()  # Builds the container
+    >>> oc.start()  # Start the container
+    >>> oc.is_running
+    True
+    >>> oc  # OwtfContainer info
+    {   'config': {   'commands': [   {   'code': '666',
+                                          'command': 'sleep 5s',
+                                          'description': 'Test',
+                                          'noise': 'passive',
+                                          'target': ''},
+                                      {   'code': '231',
+                                          'command': 'sleep 10s',
+                                          'description': 'another test',
+                                          'noise': 'active',
+                                          'target': ''}],
+                      'description': 'This container is only used for testing '
+                                     'purposes, save it!',
+                      'title': 'OwtfValhallaTestContainer',
+                      'version': '0.1'},
+        'container_id': ...,
+        'container_name': ...,
+        'container_tag': None,
+        'image': 'owtfvalhallatestcontainer:0.1',
+        'image_id': 'sha256:...',
+        'image_name': 'OwtfValhallaTestContainer',
+        'image_path': '.../valhalla/containers/testcontainer',
+        'image_version': '0.1',
+        'ip_address': ...,
+        'is_container_built': True,
+        'is_image_built': True,
+        'is_running': True,
+        'is_valid': True,
+        'log': ...,
+        'port': ...,
+        'results': [...]}
+    >>> oc.inspect()  # Docker container info
+    {...}
+    >>> oc.get_available_commands()  # Get commands related to Valhalla container
+    [{...}]
+    >>> oc.stop()  # Stop container
+    >>> oc.remove_container()  # Remove container
+    >>> oc.remove_image()  # Remove Docker image
+    """
+
+    def __init__(self, owtf_image_path: str):
 
         self.image = None
         self.image_id = None  # The id of the build image
@@ -108,7 +167,6 @@ class OwtfContainer(object):
 
                     except Exception as e:
                         log.debug(e)
-
 
                 self.is_container_built = True
                 self.container_id = container['Id']
@@ -257,17 +315,24 @@ class OwtfContainer(object):
                 log.error('Container could still be found in started docker containers')
                 raise DockerContainerException('Container could still be found in started docker containers')
 
-    def inspect(self):
-        """Inspec running container.
+    def inspect(self) -> dict:
+        """Inspec built container.
+
+        The container needs to be built to be inspected.
         :return json obj
         """
-        return dc.cli.inspect_container(container=self.container_id)
+        try:
+            inspect = dc.cli.inspect_container(container=self.container_id)
+            return inspect
+        except NullResource as e:
+            log.error('Container is not started!')
+            log.error(e)
 
-    def get_available_commands(self):
+    def get_available_commands(self) -> list:
         """Returns the part of config.json that contains available commands.
         :return json obj
         """
-        return json.dumps(self.config.get('commands'))
+        return self.config.get('commands')
 
     def __eq__(self, other):
         """obj1 == obj2"""

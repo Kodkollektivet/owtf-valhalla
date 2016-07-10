@@ -3,3 +3,5 @@ db.sqlite3
 *.py[cod]
 .idea/
 logs/
+.coverage
+docs/_build/

@@ -32,6 +32,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Nosetests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
 
 # Application definition
 
@@ -45,6 +48,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
+    'django_nose',
 
     'web',
 ]
@@ -193,21 +197,21 @@ LOGGING = {
         }
     },
     'loggers': {
-        '': {
-            'handlers': ['default', 'console'],
-            'level': 'DEBUG',
-            'propagate': True
-        },
-        'docker': {
+        # '': {
+        #     'handlers': ['default', 'console'],
+        #     'level': 'DEBUG',
+        #     'propagate': True
+        # },
+        'valhalla.dockerutils': {
             'handlers': ['docker', 'console'],
             'level': 'DEBUG',
             'propagate': True
         },
-        'django': {
-            'handlers': ['django'],
-            'level': 'DEBUG',
-            'propagate': True
-        },
+        # 'django': {
+        #     'handlers': ['django'],
+        #     'level': 'DEBUG',
+        #     'propagate': True
+        # },
         'django.requests': {
             'handlers': ['django'],
             'level': 'DEBUG',
@@ -218,11 +222,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True
         },
-        'django.db.backends': {
-            'handlers': ['django'],
-            'level': 'DEBUG',
-            'propagate': True
-        },
+        # 'django.db.backends': {
+        #     'handlers': ['django'],
+        #     'level': 'DEBUG',
+        #     'propagate': True
+        # },
     }
 }
 

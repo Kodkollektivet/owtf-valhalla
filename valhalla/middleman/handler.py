@@ -1,3 +1,16 @@
+"""
+# >>> from valhalla.dockerutils import OwtfContainer
+# >>> from valhalla.middleman.handler import send_for_execution
+# >>> oc = OwtfContainer('valhalla/containers/testcontainer')
+# >>> oc.build_image()
+# >>> oc.build_container()
+# >>> oc.start()
+# >>> oc.is_running
+# True
+# >>> send_for_execution(oc, {'command': 'ping -c 1 scanme.nmap.org'})
+# {...}
+"""
+
 import requests
 import json
 import time

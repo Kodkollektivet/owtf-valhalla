@@ -7,6 +7,7 @@ import time
 from valhalla.dockerutils import OwtfContainer
 from valhalla.middleman import send_for_execution
 from valhalla.django.settings.settings import CONTAINER_DIR
+from valhalla.qt.communicate.lock import GLOBAL_DOCKER_BUILD_IMAGE_LOCK
 
 qtowtfcontainers = []
 
@@ -19,7 +20,7 @@ class QtOwtfContainer(OwtfContainer):
         self.execute_thread = threading.Thread(target=self._start_execute_thread)
         self.execute_queue = Queue(maxsize=0)  # Unlimited Queue
         self.results_lock = threading.Lock()
-        self.is_built = True if self.is_image_built and self.is_container_built else False
+        self.is_built = self.is_image_built and self.is_container_built
 
     def _build(self):
         """Builds both image and container"""
@@ -27,14 +28,19 @@ class QtOwtfContainer(OwtfContainer):
         time.sleep(1)
         self.build_container()
         time.sleep(1)
+        self.is_built = True
 
     def build(self):
         """API call."""
-        self.build_thread.start()
-        time.sleep(1)
-        del self.build_thread
-        self.build_thread = threading.Thread(target=self._build)
-        self.is_built = True
+        if self.build_thread.is_alive():
+            return
+        else:
+            self.build_thread.start()
+            GLOBAL_DOCKER_BUILD_IMAGE_LOCK.acquire()
+            time.sleep(1)
+            del self.build_thread
+            self.build_thread = threading.Thread(target=self._build)
+            GLOBAL_DOCKER_BUILD_IMAGE_LOCK.release()
 
     def add_command(self, command):
         """Add command to execution queue."""
@@ -72,9 +78,10 @@ class QtOwtfContainer(OwtfContainer):
         """Call the internal _remove_container and _remove_image"""
         self.stop()
         time.sleep(1)
-        self._remove_container()
+        self.remove_container()
         time.sleep(1)
-        self._remove_image()
+        self.remove_image()
+        self.is_built = False
 
 
 def locate_owtf_containers(location=CONTAINER_DIR):

@@ -27,10 +27,10 @@ class ResultsWidget(QWidget, Ui_Form):
         self.counter = 0
 
     def update_results(self):
-        print('Updateing results.')
+        #print('Updateing results.')
         self.plainTextEdit.clear()
         status, ocs = get_owtf_c()
-        counter_buffer = len([res.get_results() for res in [c for c in ocs]])
+        #counter_buffer = len([res.get_results() for res in [c for c in ocs]])
         #print(counter_buffer)
         if status:
             for oc in ocs:

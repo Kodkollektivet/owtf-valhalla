@@ -24,7 +24,7 @@ class ManageContainersWidget(QWidget):
 
         self.is_built = QCheckBox('<- Built')
         self.is_built.setDisabled(True)
-        self.is_built.setChecked(self.container.is_container_built)
+        self.is_built.setChecked(self.container.is_built)
 
         self.loading = QMovie('valhalla/qt/resources/loading.gif')
         self.loading.scaledSize()
@@ -33,6 +33,9 @@ class ManageContainersWidget(QWidget):
         self.loadingLabel.setScaledContents(True)
         self.loadingLabel.setGeometry(5,-80,380,250)
         #self.loading.start()
+        #self.loading.stop()
+        #self.loadingLabel.hide()
+        #self.loadingLabel.show()
 
         self.is_running = QCheckBox('<- Running')
         self.is_running.setDisabled(True)
@@ -41,10 +44,16 @@ class ManageContainersWidget(QWidget):
         self.btn_build = QPushButton('Build')
         self.btn_start = QPushButton('Start')
         self.btn_stop = QPushButton('Stop')
+        self.btn_remove = QPushButton('Remove')
+
+        self.timer = QTimer()
+        self.timer.timeout.connect(self._check_object_state)
+        self.timer.start(1000)
 
         self.btn_build.clicked.connect(self.cmd_build)
         self.btn_start.clicked.connect(self.cmd_start)
         self.btn_stop.clicked.connect(self.cmd_stop)
+        self.btn_remove.clicked.connect(self.cmd_remove)
 
         self.vbox.addWidget(self.loadingLabel)
         self.vbox.addWidget(self.label)
@@ -53,31 +62,48 @@ class ManageContainersWidget(QWidget):
         self.vbox.addWidget(self.btn_build)
         self.vbox.addWidget(self.btn_start)
         self.vbox.addWidget(self.btn_stop)
+        self.vbox.addWidget(self.btn_remove)
         self.setLayout(self.vbox)
         self._check_object_state()
         self.show()
 
     def _check_object_state(self):
         """Check valhalla container to update GUI."""
-        start = self.container.is_running
-        if start:
+        self.is_built.setChecked(self.container.is_built)
+        self.is_running.setChecked(self.container.is_running)
+
+        if self.container.is_running:
             self.btn_start.setDisabled(True)
+            self.btn_stop.setDisabled(False)
         else:
             self.btn_start.setDisabled(False)
+            self.btn_stop.setDisabled(True)
+
+        if self.container.is_built:
+            self.btn_build.setDisabled(True)
+            self.btn_remove.setDisabled(False)
+        else:
+            self.btn_build.setDisabled(False)
+            self.btn_remove.setDisabled(True)
+            self.btn_start.setDisabled(True)
 
     def cmd_build(self):
+        """Build container."""
         self.container.build()
-        self.is_built.setChecked(self.container.is_container_built)
-        self._check_object_state()
+        self.is_built.setChecked(self.container.is_built)
 
     def cmd_start(self):
+        """Start container."""
         self.container.start()
         self.is_running.setChecked(self.container.is_running)
-        self._check_object_state()
 
     def cmd_stop(self):
-        self.loading.stop()
-        self.loadingLabel.hide()
+        """Stop container."""
         self.container.stop()
         self.is_running.setChecked(self.container.is_running)
+
+    def cmd_remove(self):
+        """Remove container."""
+        self.container.remove()
         self._check_object_state()
+

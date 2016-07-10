@@ -35,10 +35,14 @@ function test {
   echo "Running nosetests..."
   #nosetests-2.7 -q -w test/
   #python -m unittest discover -v
-  python $MANAGE_PY test -v 3 --with-doctest --exclude-dir=valhalla/containers --with-coverage --cover-package=valhalla --doctest-options=+ELLIPSIS
+  python $MANAGE_PY test -v 3 --with-doctest --exclude-dir=valhalla/containers --exclude-dir=valhalla/qt --with-coverage --cover-package=valhalla --doctest-options=+ELLIPSIS
 }
 
-if [[ $# > 1 ]]; then
+function startqt {
+  python -m valhalla.qt
+}
+
+if [[ $# > 2 ]]; then
   echo $HELP_MSG
   exit
 fi
@@ -50,7 +54,11 @@ case "$1" in
 
   start)
     init
-    start
+    if [ "$2" = "qt" ]; then
+      startqt
+    else
+      start
+    fi
     ;;
 
    test)

@@ -29,14 +29,32 @@ The output shows you what Server API version you are running.
 
 ---------------------------------------------------------------------------------
 
-# Run
+# Setup env
 
-Install [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html).
+## Install Virtualenv
+[virtualenv](https://virtualenv.pypa.io/en/latest/installation.html).
+
+## Install Qt5.
+
+#### Arch:
+
+```bash
+pacman -S qt5-base
+```
+
+#### Debian based
+
+```bash
+apt-get install qt5-default
+```
+
+# Run
 
 ```bash
 ./owtf.sh setup         # Setup
 ./owtf.sh test          # Test
 ./owtf.sh start         # Start
+./owtf.sh start qt      # Start Qt5 GUI
 ```
 
 Open browser and go to [http://127.0.0.1:8000/containers/](http://127.0.0.1:8000/containers/)

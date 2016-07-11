@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to valhalla's documentation!
+Welcome to Valhalla's documentation!
 ====================================
 
 This project aims to provide a simple and easy way to
@@ -39,6 +39,7 @@ Contents:
    :maxdepth: 2
 
    dockerutils
+   middleman
 
 
 

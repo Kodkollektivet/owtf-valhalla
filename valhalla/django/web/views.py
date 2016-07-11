@@ -13,7 +13,7 @@ from rest_framework import status
 from valhalla.django.web import serializers
 from valhalla.middleman import handler as middleman
 
-from valhalla.dockerutils import get_owtf_c, commands
+from valhalla.dockerutils import get_valhalla_container, get_objectives_and_commands
 
 
 class IndexTemplateView(TemplateView):
@@ -25,7 +25,7 @@ class ListAll(APIView):
 
     def get(self, request, format=None):
 
-        image_status, images = get_owtf_c()
+        image_status, images = get_valhalla_container()
 
         if image_status:
             serializer = serializers.OwtfContainerSerializer(
@@ -43,7 +43,7 @@ class Info(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        image_status, image = get_owtf_c(image=image)
+        image_status, image = get_valhalla_container(image=image)
 
         if image_status:
             serializer = serializers.OwtfContainerSerializer(image)
@@ -58,7 +58,7 @@ class BuildImage(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        image_status, image = get_owtf_c(image=image)
+        image_status, image = get_valhalla_container(image=image)
 
         if image_status:
             image.build_image()
@@ -74,7 +74,7 @@ class RemoveImage(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        image_status, image = get_owtf_c(image=image)
+        image_status, image = get_valhalla_container(image=image)
 
         if image_status:
             image.remove_image()
@@ -90,7 +90,7 @@ class BuildContainer(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        image_status, image = get_owtf_c(image=image)
+        image_status, image = get_valhalla_container(image=image)
 
         if image_status:
             image.build_container()
@@ -106,7 +106,7 @@ class RemoveContainer(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        image_status, image = get_owtf_c(image=image)
+        image_status, image = get_valhalla_container(image=image)
 
         if image_status:
             image.remove_container()
@@ -122,7 +122,7 @@ class Start(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        image_status, image = get_owtf_c(image=image)
+        image_status, image = get_valhalla_container(image=image)
 
         if image_status:
             image.start()
@@ -138,7 +138,7 @@ class Stop(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        image_status, image = get_owtf_c(image=image)
+        image_status, image = get_valhalla_container(image=image)
 
         if image_status:
             image.stop()
@@ -153,7 +153,7 @@ class Commands(APIView):
     """Get a command and the pass it on to the associated container"""
 
     def get(self, request, *args, **kwargs):
-        serializer = serializers.CodeSerializer(commands, many=True)
+        serializer = serializers.CodeSerializer(get_objectives_and_commands(), many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -162,7 +162,7 @@ class Execute(APIView):
 
     def get(self, request, image, *args, **kwargs):
 
-        image_status, image = get_owtf_c(image=image)
+        image_status, image = get_valhalla_container(image=image)
 
         if image_status:
             serializer = serializers.OwtfContainerSerializer(image)
@@ -173,7 +173,7 @@ class Execute(APIView):
 
     def post(self, request, image, *args, **kwargs):
 
-        image_status, image = get_owtf_c(image=image)
+        image_status, image = get_valhalla_container(image=image)
 
         if image_status:
 
@@ -199,14 +199,14 @@ class BuildAll(APIView):
 
     def get(self, request):
 
-        image_status, image = get_owtf_c()
+        image_status, image = get_valhalla_container()
         print(image)
 
         for c in image:
             c.build_image()
             c.build_container()
 
-        image_status, image = get_owtf_c()
+        image_status, image = get_valhalla_container()
 
         if image_status:
             serializer = serializers.OwtfContainerSerializer(image, many=True)
@@ -221,7 +221,7 @@ class RebuildAll(APIView):
 
     def get(self, request):
 
-        image_status, image = get_owtf_c()
+        image_status, image = get_valhalla_container()
         print(image)
 
         for c in image:
@@ -231,7 +231,7 @@ class RebuildAll(APIView):
             c.build_image()
             c.build_container()
 
-        image_status, image = get_owtf_c()
+        image_status, image = get_valhalla_container()
 
         if image_status:
             serializer = serializers.OwtfContainerSerializer(image, many=True)
@@ -246,14 +246,14 @@ class StopAll(APIView):
 
     def get(self, request):
 
-        image_status, image = get_owtf_c()
+        image_status, image = get_valhalla_container()
         print(image)
 
         for c in image:
             c.stop()
             c.remove_container()
 
-        image_status, image = get_owtf_c()
+        image_status, image = get_valhalla_container()
 
         if image_status:
             serializer = serializers.OwtfContainerSerializer(image, many=True)

@@ -11,10 +11,10 @@ _objectives_and_commands = []
 
 
 def _locate_valhalla_containers(location=CONTAINER_DIR):
-    """Locates the Valhalla containers that lives inside of the container folder.
-    The containers list the filled up with OwtfContainer objects.
+    """Locates the Valhalla containers that lives inside the
+    container folder and adds them to the _containers list.
 
-    location is only used for testing.
+    location paramater is only used for testing.
     """
     _containers.clear()
     for root, dirnames, filenames in os.walk(location):
@@ -42,10 +42,8 @@ def _aggregate_owtf_codes():
 
 
 def get_objectives_and_commands() -> list:
-    """Returns a list that OWASP pentesting objectives.
-    The list contains dicts.
-    Each dict is an OWASP pentesting objective
-    and a list of commands related to objective.
+    """Returns a list of dicts, containing OWASP pentesting objectives along
+    with a list of commands related to objective.
     """
     return _objectives_and_commands
 

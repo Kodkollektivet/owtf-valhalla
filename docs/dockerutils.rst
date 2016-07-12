@@ -1,4 +1,4 @@
-valhalla.dockerutils
+containerutils
 ====================
 .. automodule:: valhalla.dockerutils
 
@@ -20,4 +20,9 @@ image has been built, if the container is running and so on.
 .. autoclass:: OwtfContainer
     :members:
 
+
+.. autofunction:: get_valhalla_container
+
+
+.. autofunction:: get_objectives_and_commands
 

@@ -7,48 +7,53 @@ from .owtfcontainer import OwtfContainer
 from valhalla.django.settings.settings import CONTAINER_DIR
 
 _containers = []
-commands = []
+_objectives_and_commands = []
 
 
-def locate_owtf_containers(location=CONTAINER_DIR):
-    """Locates the containers that lives inside of the container folder.
-    The containers list the filled up with OwtfContainer objects.
+def _locate_valhalla_containers(location=CONTAINER_DIR):
+    """Locates the Valhalla containers that lives inside the
+    container folder and adds them to the _containers list.
 
-    location is only used for testing.
+    location paramater is only used for testing.
     """
+    _containers.clear()
     for root, dirnames, filenames in os.walk(location):
         for filename in fnmatch.filter(filenames, 'config.json'):
             if 'Dockerfile' and 'config.json' in filenames:
                 _containers.append(OwtfContainer(root))
 
 
-def aggregate_owtf_codes():
+def _aggregate_owtf_codes():
     """Get all commands available.
     Iterates over all of the containers and
     assembles the commands from each of the
     container.
     """
-    commandDict = {}
+    _objectives_and_commands.clear()
+    command_dict = {}
     for container in _containers:
         for command in container.config['commands']:
             code = command['code']
             command['image'] = container.image
-            commandDict.setdefault(code, []).append(command)
-    for key, value in commandDict.items():
-        codeDict = {'code': key, 'commands': value}
-        commands.append(codeDict)
+            command_dict.setdefault(code, []).append(command)
+    for key, value in command_dict.items():
+        code_dict = {'code': key, 'commands': value}
+        _objectives_and_commands.append(code_dict)
 
 
-locate_owtf_containers()
-aggregate_owtf_codes()
+def get_objectives_and_commands() -> list:
+    """Returns a list of dicts, containing OWASP pentesting objectives along
+    with a list of commands related to objective.
+    """
+    return _objectives_and_commands
 
 
-def get_owtf_c(image=None, image_id=None, container_id=None):
+def get_valhalla_container(image=None, image_id=None, container_id=None) -> tuple:
     """This is the facade to the outside.
-    If get_owtf_c() with no arguments is called, returns all the containers
-    If get_owtf_c(image=<IMAGE>), return that container
-    If get_owtf_c(image=<IMAGE_ID>) if image is build, return that container
-    If get_owtf_c(image=<CONTAINER_ID>) if container is buld, return that container
+    If get_valhalla_container() with no arguments is called, returns all the containers
+    If get_valhalla_container(image=<IMAGE>), return that container
+    If get_valhalla_container(image=<IMAGE_ID>) if image is build, return that container
+    If get_valhalla_container(image=<CONTAINER_ID>) if container is buld, return that container
 
     Only one or no argument can be passed.
 
@@ -56,21 +61,20 @@ def get_owtf_c(image=None, image_id=None, container_id=None):
     bool = status
     obj = object
 
-    >>> from valhalla.dockerutils import handler
-    >>> from valhalla.dockerutils.owtfcontainer import OwtfContainer
-    >>> status, container = handler.get_owtf_c(image='owtfvalhallatestcontainer:0.1')
+    >>> from valhalla.dockerutils import OwtfContainer, get_valhalla_container
+    >>> status, container = get_valhalla_container(image='owtfvalhallatestcontainer:0.1')
     >>> status
     True
     >>> isinstance(container, OwtfContainer)
     True
-    >>> status, container = handler.get_owtf_c(image='doesnotexists:0.1')
+    >>> status, container = get_valhalla_container(image='doesnotexists:0.1')
     >>> status
     False
     >>> container  # is None
-    >>> status, containers = handler.get_owtf_c()
+    >>> status, containers = get_valhalla_container()
     >>> status
     True
-    >>> isinstance(containers, list)
+    >>> isinstance(containers, list)  # Contains all the Valhalla containers
     True
     >>>
     """
@@ -98,3 +102,7 @@ def get_owtf_c(image=None, image_id=None, container_id=None):
 
     else:
         return True, _containers
+
+# Find containers, objectives and commands.
+_locate_valhalla_containers()
+_aggregate_owtf_codes()

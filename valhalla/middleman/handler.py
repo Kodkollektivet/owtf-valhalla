@@ -16,9 +16,12 @@ import json
 import time
 from datetime import datetime
 
+from valhalla.dockerutils import OwtfContainer
 
-def send_for_execution(image, cmd):
-    """Sends the command to the container and asks for result.
+
+def send_for_execution(image: OwtfContainer, cmd) -> dict:
+    """Sends the command to the container
+    and return result in a dict.
     """
     cmd_org = cmd
     cmd = json.dumps(cmd)

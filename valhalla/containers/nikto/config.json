@@ -5,9 +5,8 @@
   "commands": [
     {
       "noise": "?",
-      "code": "nikto",
+      "code": "OTG-INFO-004",
       "command": "nikto.pl -host @@@HOST@@@",
-      "target": "?",
       "description": ""
     }
   ]

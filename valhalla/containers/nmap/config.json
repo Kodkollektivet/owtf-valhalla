@@ -7,56 +7,48 @@
       "noise": "active",
       "code": "OTG-INFO-004",
       "command": "nmap -PN -sT -sV -p0-65535 @@@HOST@@@",
-      "target": "?",
       "description": "TCP connect scan that tries to determine a service to port relationship"
     },
     {
       "noise": "?",
       "code": "OTG-INFO-002",
       "command": "nmap -sP @@@HOST@@@",
-      "target": "",
       "description": "Ping Scan, detect if host is online."
     },
     {
       "noise": "?",
       "code": "?",
       "command": "nmap --top-ports 1000 @@@HOST@@@",
-      "target": "?",
       "description": "Portscans via the top-ports script on the top 1000 most common ports"
     },
     {
       "noise": "?",
       "code": "?",
       "command": "nmap -P0 @@@HOST@@@",
-      "target": "?",
       "description": "IP protocol ping to detect if the host is online"
     },
     {
       "noise": "?",
       "code": "?",
       "command": "nmap -sS -P0 -sV -O @@@HOST@@@",
-      "target": "?",
       "description": "Half-open, IP protocol ping, half-open"
     },
     {
       "noise": "?",
       "code": "?",
       "command": "nmap -p 80 --script hostmap-bfk.nse @@@HOST@@@",
-      "target": "?",
       "description": "?"
     },
     {
       "noise": "?",
       "code": "?",
       "command": "nmap --traceroute --script traceroute-geolocation.nse -p 80 @@@HOST@@@",
-      "target": "?",
       "description": "?"
     },
     {
       "noise": "active",
       "code": "?",
       "command": "nmap --script=default @@@HOST@@@",
-      "target": "?",
       "description": "runs the default scripts "
     }
   ]

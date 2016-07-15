@@ -1,0 +1,13 @@
+{
+  "title": "nikto",
+  "version": "0.1",
+  "description": "Nikto Container",
+  "commands": [
+    {
+      "noise": "?",
+      "code": "OTG-INFO-004",
+      "command": "nikto.pl -host @@@HOST@@@",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "title": "dirbuster",
+  "version": "0.1",
+  "description": "dirbuster Container",
+  "commands": [
+    {
+      "noise": "?",
+      "code": "OTG-CONFIG-005",
+      "command": "java -jar DirBuster-0.12.jar -H -u @@@HOST@@@",
+      "description": "default dirbuster directory check"
+    }
+  ]
+}

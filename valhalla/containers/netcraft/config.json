@@ -1,0 +1,13 @@
+{
+  "title": "NetcraftScraperScanner",
+  "version": "0.1",
+  "description": "Netcraft Scraper Container",
+  "commands": [
+    {
+      "noise": "passive",
+      "code": "OTG-INFO-002",
+      "command": "@@@HOST@@@",
+      "description": "netcraft scan"
+    }
+  ]
+}
